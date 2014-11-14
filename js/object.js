@@ -91,10 +91,20 @@ function ActiveObject(inname, inx, iny, inw, inh){
         return this.y;
     }
     
-    this.getColliding = function(root){
+    this.getCollidingIndex = function(root){
     	for(var i = 0; i < root.static_objects.length; i++){
     		if(this.col.isColliding(root.static_objects[i].col)){
     			return root.static_objects[i];
+    		} else {
+    			return false;
+    		}
+    	}
+    }
+    
+    this.getCollidingIndex = function(root){
+    	for(var i = 0; i < root.static_objects.length; i++){
+    		if(this.col.isColliding(root.static_objects[i].col)){
+    			return i;
     		} else {
     			return false;
     		}
