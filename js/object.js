@@ -90,6 +90,17 @@ function ActiveObject(inname, inx, iny, inw, inh){
     this.getY = function(){
         return this.y;
     }
+    
+    this.getColliding = function(root){
+    	for(var i = 0; i < root.static_objects.length; i++){
+    		if(this.col.isColliding(root.static_objects[i])){
+    			return root.static_objects[i];
+    		} else {
+    			return false;
+    		}
+    	}
+    }
+    
     this.update = function(delta, scl){        
         delAcc = new Vector((this.acceleration.getX()+this.gravity.getX())*delta,
                             (this.acceleration.getY()+this.gravity.getY())*delta);
