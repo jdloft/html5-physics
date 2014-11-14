@@ -93,7 +93,7 @@ function ActiveObject(inname, inx, iny, inw, inh){
     
     this.getColliding = function(root){
     	for(var i = 0; i < root.static_objects.length; i++){
-    		if(this.col.isColliding(root.static_objects[i])){
+    		if(this.col.isColliding(root.static_objects[i].col)){
     			return root.static_objects[i];
     		} else {
     			return false;
