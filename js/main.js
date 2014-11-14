@@ -43,7 +43,7 @@ $(document).ready(function(){
     mRoot.getPlayer().gravity = new Vector(0, -13);
     mRoot.getPlayer().setPosition(300, 300);
     mRoot.getPlayer().mass = 50;
-    mRoot.getPlayer().maxSpeed = new Vector(10, 15);
+    mRoot.getPlayer().maxSpeed = new Vector(12, 1500);
     $("#loadingSplash").remove();
 });
 
