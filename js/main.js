@@ -49,7 +49,7 @@ $(document).ready(function(){
 
 function keyDown(e){
 	if(e.keyCode == "81"){
-		delete mRoot.static_objects.splice(mRoot.getPlayer().getColliding(), 1);
+		delete mRoot.static_objects.splice(mRoot.getPlayer().getColliding(mRoot), 1);
 	}
 	if(gameStarted == false){
 		$(title).animate({ top: "-242px" }, 300, function(){$(title).remove()});
