@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>Timing Test</title>
+</head>
+<body>
+<div id="time1"></div>
+<div id="time2"></div>
+<div id="time3"></div>
+<script type="text/javascript">
+var start = window.performance.now()
+var current = window.performance.now()
+
+function time(element){
+	current = window.performance.now()
+	document.getElementById(element).innerHTML = ''+((current-start)/1000);
+}
+
+setInterval(function(){time("time1")}, 1);
+setInterval(function(){time("time2")}, 20);
+setInterval(function(){time("time3")}, 300);
+</script>
+</body>
+</html>

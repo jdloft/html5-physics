@@ -1,0 +1,136 @@
+@font-face {
+    font-family: AgencyFbRegular;
+    src: url(../font/agency_fb_regular.ttf);
+}
+
+body {
+    background-color:#fff;
+    font-family: AgencyFbRegular;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin: 0;
+    padding: 0;
+}
+
+#loadingSplash {
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-color: #fff;
+}
+
+#loadingSplash #loadingText {
+    font-size: 48px;
+    text-align: center;
+    width: 300px;
+    height: 30px;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#title {
+    background-image: url("../img/title.png");
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 369px;
+    height: 212px;
+    border: 1px solid #000;
+    z-index: -9;
+}
+
+#canvas {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: -10;
+}
+
+#panel {
+    background-color: #fff;
+	color: #333;
+	overflow-y: scroll;
+    text-align: center;
+    width: 300px;
+    height: 100%;
+    position: absolute;
+    display: block;
+    right: 3px;
+    top: 0px;
+    border-left: 1px solid #000;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    z-index: -9;
+}
+
+#panel .section {
+    padding-bottom: 10px;
+    padding-top: 15px;
+}
+
+#panel hr {
+    width: 70%;
+    height: 2px;
+    background-color:#bbb;
+    border: none;
+    margin-bottom: 15px;
+}
+
+#panel input {
+    font-family: AgencyFbRegular;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+#panel .range {
+    width: 60%;
+    float: center;
+
+}
+#panel .label {
+    width: 20%;
+    float: left;
+    margin-bottom: 15px;
+}
+
+#panel .reset {
+    width: 10%;
+    float: right;
+    margin-bottom: 10px;
+}
+
+.subsection-header {
+	color: #000;
+	font-size: 24px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 5px;
+	text-align: center;
+	cursor: pointer;
+    border-bottom: 1px solid #999;
+	box-shadow: 0 0 0px 2px #ccc;
+}
+
+img {
+    display: block;
+    width: 361px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    border: 1px solid #000;
+}

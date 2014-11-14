@@ -1,0 +1,133 @@
+<!DOCTYPE html5>
+<meta charset="UTF-8">
+<html>
+    <head>
+        <title>html5 Physics Test</title>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/math.js"></script>
+        <script type="text/javascript" src="js/object.js"></script>
+        <script type="text/javascript" src="js/physics.js"></script>
+        <script type="text/javascript" src="js/render.js"></script>
+        <script type="text/javascript" src="js/level.js"></script>
+        <script type="text/javascript" src="js/root.js"></script>
+        <script type="text/javascript" src="js/gameplay.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+        <script type="text/javascript">
+            function timeAcceleration(val){
+                timeAcc = val/100;
+                document.getElementById("timeAccLabel").innerHTML = (val/100).toFixed(2);
+            }
+            
+            function frameRate(val){
+                timeBend = val;
+                document.getElementById("frameRateLabel").innerHTML = val;
+            }
+            
+            function physicsUpdates(val){
+                physicsUpd = val;
+                document.getElementById("physicsUpdatesLabel").innerHTML = val;
+            }
+            
+            function zoom(val){
+                mRoot.scale = 1/(val/100);
+                document.getElementById("zoomLabel").innerHTML = "1:"+(val/100).toFixed(2);
+            }
+            
+            function gravity(inx, iny){
+            	mRoot.getPlayer().gravity.x = inx/100;
+            	mRoot.getPlayer().gravity.y = iny/100;
+            	document.getElementById("gravityLabel").innerHTML = mRoot.getPlayer().gravity.print(2);
+            }
+            
+            function gravSliders(){
+            	document.getElementById("gravityxRange").value = mRoot.getPlayer().gravity.x*100;
+            	document.getElementById("gravityyRange").value = mRoot.getPlayer().gravity.y*100;
+            }
+            
+            function timeAccReset(){
+                timeAcceleration(100);
+                document.getElementById("timeAccRange").value = 100;
+            }
+            
+            function frameRateReset(){
+                frameRate(0);
+                document.getElementById("frameRateRange").value = 0;
+            }
+            
+            function physicsUpdatesReset(){
+                physicsUpdates(1);
+                document.getElementById("physicsUpdatesRange").value = 1;
+            }
+
+            function zoomReset(){
+                zoom(100);
+                document.getElementById("zoomRange").value = 100;
+            }
+        </script>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div id="loadingSplash">
+            <div id="loadingText">Loading...</div>
+        </div>
+        <div id="title"></div>
+        <canvas id="canvas" width="800" height="600"></canvas>
+        <div id="panel">
+            <div class="section" id="status">
+                
+            </div>
+            <div class="section">
+				<div class="subsection-header" onclick="$('#controlsSubsection').toggle()">Game Controls</div>
+				<div class="subsection" id="controlsSubsection">
+					<input type="button" value="Randomize Platforms!" onClick="randomizePlatforms(mRoot.static_objects)">
+					<input type="button" value="Respawn Player!" onClick="respawn(mRoot.getPlayer())">
+					<input type="button" value="Support Player!" onClick="if(!playerColliding){ mRoot.addStaticObject(mRoot.getPlayer().position.getX()-50, mRoot.getPlayer().position.getY()-30, 100, 10) }">
+				</div>
+				<div class="subsection-header" onclick="$('#timeSubsection').toggle()">Time</div>
+				<div class="subsection" id="timeSubsection">
+					Delta Time <br>
+					<div id="timeAccLabel" class="label" >1.00</div>
+					<input id="timeAccRange" class="range" type="range" min="1" max="1000" value="100" steps="1" onmousemove="timeAcceleration(this.value)">
+					<input id="timeAccReset" class="reset" type="button" value="R" onclick="timeAccReset()"><br><hr noshade="noshade">
+
+					Framerate Offset <br>
+					<div id="frameRateLabel" class="label">0</div>
+					<input id="frameRateRange" class="range" type="range" min="0" max="100" value="0" steps="1" onmousemove="frameRate(this.value)">
+					<input id="frameRateReset" class="reset" type="button" value="R" onclick="frameRateReset()"><br><hr noshade="noshade">
+					
+					Physics Updates <br>
+					<div id="physicsUpdatesLabel" class="label">1</div>
+					<input id="physicsUpdatesRange" class="range" type="range" min="0" max="10" value="1" steps="1" onmousemove="physicsUpdates(this.value)">
+					<input id="physicsUpdatesReset" class="reset" type="button" value="R" onclick="physicsUpdatesReset()"><br><hr noshade="noshade">
+				</div>
+			
+				<div class="subsection-header" onclick="$('#cameraSubsection').toggle()">Camera</div>
+				<div class="subsection" id="cameraSubsection">
+					Zoom <br>
+					<div id="zoomLabel" class="label">1:1.00</div>
+					<input id="zoomRange" class="range" type="range" min="1" max="500" value="100" steps="1" onmousemove="zoom(this.value)">
+					<input id="zoomReset" class="reset" type="button" value="R" onclick="zoomReset()"><br><hr noshade="noshade">
+				</div>
+
+				<div class="subsection-header" onclick="$('#physicsSubsection').toggle()">Physics</div>
+				<div class="subsection" id="physicsSubsection">
+					Gravity <br>
+					<div id="gravityLabel" class="label" style="margin-top: 10px; width: 100%; text-align: center;">(0, -20)</div>
+					X: <input id="gravityxRange" class="range" type="range" min="-5000" max="5000" value="0" steps="1" onmousemove="gravity(this.value, document.getElementById('gravityyRange').value)"><br>
+					Y: <input id="gravityyRange" class="range" type="range" min="-5000" max="5000" value="-2000" steps="1" onmousemove="gravity(document.getElementById('gravityxRange').value, this.value)"><br>
+					<input type="button" value="No Gravity!" onClick="gravity(0, 0); gravSliders()">
+					<input type="button" value="Invert Gravity!" onClick="gravity(0, 2000); gravSliders()">
+					<input id="gravityReset" class="reset" type="button" value="R" onclick="gravity(0, -2000); gravSliders()"><br><hr noshade="noshade">
+				</div>
+            </div>
+        </div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#controlsSubsection").toggle();
+			$("#timeSubsection").toggle();
+			$("#cameraSubsection").toggle();
+			$("#physicsSubsection").toggle();
+		});
+	</script>
+    </body>
+</html>
