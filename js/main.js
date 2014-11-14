@@ -49,7 +49,9 @@ $(document).ready(function(){
 
 function keyDown(e){
 	if(e.keyCode == "81"){
-		delete mRoot.static_objects.splice(mRoot.getPlayer().getCollidingIndex(mRoot), 1);
+		if(mRoot.getPlayer().getCollidingIndex(mRoot) != false)}{
+			delete mRoot.static_objects.splice(mRoot.getPlayer().getCollidingIndex(mRoot), 1);
+		}
 	}
 	if(gameStarted == false){
 		$(title).animate({ top: "-242px" }, 300, function(){$(title).remove()});
