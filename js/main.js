@@ -104,6 +104,9 @@ function keyDown(e){
         right = true;
         mRoot.getPlayer().addForce(speed, 0);
     }
+    if(e.keyCode == "70"){ // Player Reset
+        mRoot.getPlayer().reset();
+    }
 }
 
 function keyUp(e){
