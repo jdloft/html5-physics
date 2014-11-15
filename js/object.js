@@ -23,6 +23,7 @@ function StaticObject(inname, inx, iny, inw, inh){
 function ActiveObject(inname, inx, iny, inw, inh){
 	this.name = inname;
     this.col = new AABB(inx, iny, inw, inh);
+    this.colIndex = 0;
     this.drawable = new Rect(inx, iny, inw, inh, "#000");
 
     this.friction = .96;
@@ -89,26 +90,6 @@ function ActiveObject(inname, inx, iny, inw, inh){
     }
     this.getY = function(){
         return this.y;
-    }
-    
-    this.getCollidingIndex = function(root){
-    	for(var i = 0; i < root.static_objects.length; i++){
-    		if(this.col.isColliding(root.static_objects[i].col)){
-    			return root.static_objects[i];
-    		} else {
-    			return false;
-    		}
-    	}
-    }
-    
-    this.getCollidingIndex = function(root){
-    	for(var i = 0; i < root.static_objects.length; i++){
-    		if(this.col.isColliding(root.static_objects[i].col)){
-    			return i;
-    		} else {
-    			return false;
-    		}
-    	}
     }
     
     this.update = function(delta, scl){        

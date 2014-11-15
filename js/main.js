@@ -43,14 +43,14 @@ $(document).ready(function(){
     mRoot.getPlayer().gravity = new Vector(0, -13);
     mRoot.getPlayer().setPosition(300, 300);
     mRoot.getPlayer().mass = 50;
-    mRoot.getPlayer().maxSpeed = new Vector(12, 1500);
+    mRoot.getPlayer().maxSpeed = new Vector(6, 1500);
     $("#loadingSplash").remove();
 });
 
 function keyDown(e){
 	if(e.keyCode == "81"){
-		if(mRoot.getPlayer().getCollidingIndex(mRoot) != false)}{
-			delete mRoot.static_objects.splice(mRoot.getPlayer().getCollidingIndex(mRoot), 1);
+		if(mRoot.getPlayer().col.isColliding(mRoot.static_objects[mRoot.getPlayer().colIndex].col)){
+			delete mRoot.static_objects.splice(mRoot.getPlayer().colIndex, 1);
 		}
 	}
 	if(gameStarted == false){

@@ -141,8 +141,11 @@ function Physics(){
         for(var i = 0; i < active_objects.length; i++){
             for(var j = 0; j < static_objects.length; j++){
                 if(!static_objects[j].col.isColliding(active_objects[i].col)){
-                    this.minTranslation.set(0.0, 0.0)
+                    this.minTranslation.set(0.0, 0.0);
                 } else {
+                    if(active_objects[i].name == "player"){
+                        active_objects[i].colIndex = j;
+                    }
                     this.minTranslation = active_objects[i].col.minimumTranslate(static_objects[j].col);
                     active_objects[i].position.x += this.minTranslation.x;
                     active_objects[i].position.y += this.minTranslation.y;
