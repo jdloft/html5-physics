@@ -11,6 +11,14 @@ function StaticObject(inname, inx, iny, inw, inh){
         this.col.setPosition(inx, iny);
         this.drawable.setPosition(inx, iny);
     }
+    this.addPosition = function(inx, iny){
+        this.position.x += inx;
+        this.position.y += iny;
+        this.col.x += inx;
+        this.col.y += iny;
+        this.drawable.x += inx;
+        this.drawable.y += iny;
+    }
     this.update = function(delta, scl){
         this.drawable.setPosition(this.position.getX()*scl, this.position.getY()*scl);
         this.drawable.setScale(this.col.w*scl, this.col.h*scl);
@@ -84,6 +92,11 @@ function ActiveObject(inname, inx, iny, inw, inh){
     }
     this.setPosition = function(inx, iny){
         this.position.set(inx, iny);
+    }
+    this.addPosition = function(inx, iny){
+        this.position.add(inx, iny);
+        this.col.position.add(inx, iny);
+        this.drawable.position.add(inx, iny);
     }
     this.getX = function(){
         return this.x;

@@ -1,8 +1,5 @@
 // General Scripting (done with API provided by other .js files)
 
-status = "status";
-
-
 var up = false;
 var down = false;
 var left = false;
@@ -144,11 +141,11 @@ function updateRender(){
     rcurr = window.performance.now();
     renderTime = ((rcurr - rprev) - timeBend);
 
-    document.getElementById(status).innerHTML = "FPS: " + Number((1000/renderTime).toFixed(0)) + "<br>" +
-                     "UPS: " + Number((1000/physicsTime).toFixed(0)) + "<br>" + 
-                     "Position: " + mRoot.getPlayer().getPosition().print(2) + "<br>" +
-                     "Velocity: " + mRoot.getPlayer().getVelocity().print(2) + "<br>" +
-                     "Acceleration: " + mRoot.getPlayer().getAcceleration().print(2);
+    document.getElementById("fps").innerHTML = (1000/renderTime).toFixed(0);
+    document.getElementById("ups").innerHTML = (1000/physicsTime).toFixed(0);
+    document.getElementById("pos").innerHTML = mRoot.getPlayer().getPosition().print(2);
+    document.getElementById("vel").innerHTML = mRoot.getPlayer().getVelocity().print(2);
+    document.getElementById("acc").innerHTML = mRoot.getPlayer().getAcceleration().print(2);
 
     // -------Render----------
     mRoot.updateRender();
