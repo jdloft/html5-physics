@@ -27,6 +27,15 @@ function Root(canvas, width, height){
 		this.static_objects.push(new StaticObject(inname || tempName, inx, iny, inw, inh));
 	}
 
+    this.getStaticObjectByName = function(nm){
+        for(var i = 0; i < this.static_objects.length; i++){
+            if(this.static_objects[i].name == nm){
+                return this.static_objects[i];
+                break;
+            }
+        }
+    }
+
 	this.addActiveObject = function(inname, inx, iny, inw, inh){
         tempName = "active_" + this.active_objects.length+1;
 		if(name != "player"){

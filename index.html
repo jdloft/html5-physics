@@ -64,18 +64,31 @@
                 document.getElementById("zoomRange").value = 100;
             }
 
+            function updateWidth(val){
+                if(playerColliding){
+                    mRoot.static_objects[mRoot.getPlayer().colIndex].setScale(Number(val), mRoot.static_objects[mRoot.getPlayer().colIndex].col.h);
+                }
+            }
+
+            function updateHeight(val){
+                if(playerColliding){
+                    mRoot.static_objects[mRoot.getPlayer().colIndex].setScale(mRoot.static_objects[mRoot.getPlayer().colIndex].col.w, Number(val));
+                }
+            }
+
+            var nudgeAmount = 10;
+
             function nudge(dir){
                 if(playerColliding){
                     if(dir == "up"){
-                        mRoot.static_objects[mRoot.getPlayer().colIndex].addPosition(0, 10);
+                        mRoot.static_objects[mRoot.getPlayer().colIndex].addPosition(0, nudgeAmount);
                     } else if(dir == "down"){
-                        mRoot.static_objects[mRoot.getPlayer().colIndex].addPosition(0, -10);
+                        mRoot.static_objects[mRoot.getPlayer().colIndex].addPosition(0, -nudgeAmount);
                     } else if(dir == "left"){
-                        mRoot.static_objects[mRoot.getPlayer().colIndex].addPosition(-10, 0);
+                        mRoot.static_objects[mRoot.getPlayer().colIndex].addPosition(-nudgeAmount, 0);
                     } else if(dir == "right"){
-                        mRoot.static_objects[mRoot.getPlayer().colIndex].addPosition(10, 0);
+                        mRoot.static_objects[mRoot.getPlayer().colIndex].addPosition(nudgeAmount, 0);
                     }
-                    mRoot.static_objects[mRoot.getPlayer().colIndex].update(0, mRoot.scale);
                 }
             }
         </script>
@@ -164,11 +177,11 @@
                         </tr>
                         <tr>
                             <td class="lab">Width: </td>
-                            <td><input class="text" id="widthControl" type="text" onchange="updateWidth(this.value)"></td>
+                            <td><input class="text" id="widthControl" type="text" onchange="updateWidth(this.value)" onfocus="editingDimensions = true;" onblur="editingDimensions = false;"></td>
                         </tr>
                         <tr>
                             <td class="lab">Height: </td>
-                            <td><input class="text" id="heightControl" type="text" onchange="updateHeight(this.value)"></td>
+                            <td><input class="text" id="heightControl" type="text" onchange="updateHeight(this.value)" onfocus="editingDimensions = true;" onblur="editingDimensions = false;"></td>
                         </tr>
                         <table id="platformControls">
                             <tr>
@@ -182,7 +195,9 @@
                                 <td>
                                     <a href="#" onClick="nudge('left')"><img src="img/arrows/left.png"></a>
                                 </td>
-                                <td></td>
+                                <td>
+                                    <input class="text" type="text" id="nudgeAmount" style="width: 38px; height: 38px;" value="10" onchange="nudgeAmount = Number(this.value)">
+                                </td>
                                 <td>
                                     <a href="#" onClick="nudge('right')"><img src="img/arrows/right.png"></a>
                                 </td>

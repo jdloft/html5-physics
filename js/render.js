@@ -32,8 +32,10 @@ function Render(can, width, height){
     this.h = height;
     this.canvas = document.getElementById(can);
     this.context = this.canvas.getContext("2d");
-    this.context.translate(0, this.h);
-    this.context.scale(1, -1);
+    this.updateContext = function(){
+        this.context.scale(1, -1);
+        this.context.translate(0, -this.h);
+    }
     this.drawRect = function(rect){
         this.context.fillStyle = rect.color;
         this.context.fillRect(rect.x, rect.y, rect.w, rect.h);

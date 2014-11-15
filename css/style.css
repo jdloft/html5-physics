@@ -105,7 +105,10 @@ body {
 
 #panel .text {
     width: 30px;
-    border: solid 1px #bbb;
+    margin-bottom: -2px;
+    /* border: solid 1px #bbb; */
+    border: none;
+    text-align: center;
 }
 
 #panel .label {

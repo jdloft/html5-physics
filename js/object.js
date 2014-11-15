@@ -19,6 +19,12 @@ function StaticObject(inname, inx, iny, inw, inh){
         this.drawable.x += inx;
         this.drawable.y += iny;
     }
+    this.setScale = function(x, y){
+        this.col.w = x;
+        this.col.h = y;
+        this.drawable.w = x;
+        this.drawable.h = y;
+    }
     this.update = function(delta, scl){
         this.drawable.setPosition(this.position.getX()*scl, this.position.getY()*scl);
         this.drawable.setScale(this.col.w*scl, this.col.h*scl);

@@ -15,6 +15,8 @@ var can;
 var ctx;
 var mRoot;
 
+var editingDimensions = false;
+
 $(document).ready(function(){
     var width = window.innerWidth - $("#panel").width();
     var height = window.innerHeight;
@@ -28,6 +30,7 @@ $(document).ready(function(){
     $(can).css("height", height);
 
     mRoot = new Root("canvas", width, height);
+    mRoot.mRender.updateContext();
 
     mRoot.addStaticObject(0, 50, 500, 10);
     mRoot.addStaticObject(0, 200, 400, 10);
@@ -43,6 +46,19 @@ $(document).ready(function(){
     mRoot.getPlayer().maxSpeed = new Vector(6, 1500);
     $("#loadingSplash").remove();
 });
+
+function resize(e){
+    console.log("onresize firing");
+    mRoot.mRender.w = window.innerWidth - $("#panel").width();
+    mRoot.mRender.h = window.innerHeight;
+    can.setAttribute("width", mRoot.mRender.w);
+    can.setAttribute("height", mRoot.mRender.h);
+    $(can).css("width", mRoot.mRender.w);
+    $(can).css("height", mRoot.mRender.h);
+    mRoot.mRender.updateContext();
+}
+
+$(window).resize(resize);
 
 function keyDown(e){
 	if(e.keyCode == "81"){
@@ -146,6 +162,20 @@ function updateRender(){
     document.getElementById("pos").innerHTML = mRoot.getPlayer().getPosition().print(2);
     document.getElementById("vel").innerHTML = mRoot.getPlayer().getVelocity().print(2);
     document.getElementById("acc").innerHTML = mRoot.getPlayer().getAcceleration().print(2);
+
+    if(playerColliding){
+        document.getElementById("nameLabel").innerHTML = mRoot.static_objects[mRoot.getPlayer().colIndex].name;
+        if(!editingDimensions){
+            document.getElementById("widthControl").value = mRoot.static_objects[mRoot.getPlayer().colIndex].drawable.w;
+            document.getElementById("heightControl").value = mRoot.static_objects[mRoot.getPlayer().colIndex].drawable.h;
+        }
+    } else {
+        document.getElementById("nameLabel").innerHTML = "None";
+        if(!editingDimensions){
+            document.getElementById("widthControl").value = 0;
+            document.getElementById("heightControl").value = 0;
+        }
+    }
 
     // -------Render----------
     mRoot.updateRender();
