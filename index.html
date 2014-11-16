@@ -82,13 +82,25 @@
                 if(playerColliding){
                     if(dir == "up"){
                         mRoot.static_objects[mRoot.getPlayer().colIndex].addPosition(0, nudgeAmount);
+                        mRoot.getPlayer().addPosition(0, nudgeAmount);
                     } else if(dir == "down"){
                         mRoot.static_objects[mRoot.getPlayer().colIndex].addPosition(0, -nudgeAmount);
+                        mRoot.getPlayer().addPosition(0, -nudgeAmount);
                     } else if(dir == "left"){
                         mRoot.static_objects[mRoot.getPlayer().colIndex].addPosition(-nudgeAmount, 0);
+                        mRoot.getPlayer().addPosition(-nudgeAmount, 0);
                     } else if(dir == "right"){
                         mRoot.static_objects[mRoot.getPlayer().colIndex].addPosition(nudgeAmount, 0);
+                        mRoot.getPlayer().addPosition(nudgeAmount, 0);
                     }
+                }
+            }
+
+            function swapRendering(val){
+                if(mRoot.mRender.animationFrame && val == true){
+                    renderID = mRoot.mRender.toggleAnimationFrame(renderID, updateRender);
+                } else if(!mRoot.mRender.animationFrame && val == false){
+                    renderID = mRoot.mRender.toggleAnimationFrame(renderID, updateRender);
                 }
             }
         </script>
@@ -182,8 +194,10 @@
                         </tr>
                         <tr>
                             <td class="lab">Height: </td>
-                            <td><input class="text" id="heightControl" type="text" onchange="updateHeight(this.value)" onfocus="editingDimensions = true;" onblur="editingDimensions = false;"></td>
+                            <td><input class="text" id="heightControl" type="text" onchange="updateHeight(this.prop('checked'))" onfocus="editingDimensions = true;" onblur="editingDimensions = false;"></td>
                         </tr>
+                        <br>
+                        Nudge Platform
                         <table id="platformControls">
                             <tr>
                                 <td></td>
@@ -214,6 +228,10 @@
                     </table>
                     <br><hr noshade="noshade">
                 </div>
+                <div class="subsection-header" onclick="$('#renderSubsection').toggle()">Rendering</div>
+                <div class="subsection" id="renderSubsection">
+                    Fast Rendering: <input id="renderModeSwap" type="checkbox" onclick="swapRendering(this.checked)">
+                </div>
             </div>
         </div>
 	<script type="text/javascript">
@@ -223,6 +241,7 @@
 			$("#cameraSubsection").toggle();
 			$("#physicsSubsection").toggle();
             $("#editModeSubsection").toggle();
+            $("#renderSubsection").toggle();
 		});
 	</script>
     </body>

@@ -32,6 +32,18 @@ function Render(can, width, height){
     this.h = height;
     this.canvas = document.getElementById(can);
     this.context = this.canvas.getContext("2d");
+    this.animationFrame = true;
+
+    this.toggleAnimationFrame = function(renID, update){
+        this.animationFrame = !this.animationFrame;
+        if(this.animationFrame){
+            clearInterval(renID);
+            return requestAnimationFrame(update);
+        } else {
+            cancelAnimationFrame(renID);
+            return setInterval(update, 1);
+        }
+    }
     this.updateContext = function(){
         this.context.scale(1, -1);
         this.context.translate(0, -this.h);

@@ -100,9 +100,12 @@ function ActiveObject(inname, inx, iny, inw, inh){
         this.position.set(inx, iny);
     }
     this.addPosition = function(inx, iny){
-        this.position.add(inx, iny);
-        this.col.position.add(inx, iny);
-        this.drawable.position.add(inx, iny);
+        this.position.x += inx;
+        this.position.y += iny;
+        this.col.x += inx;
+        this.col.y += iny;
+        this.drawable.x += inx;
+        this.drawable.y += iny;
     }
     this.getX = function(){
         return this.x;

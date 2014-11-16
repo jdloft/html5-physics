@@ -40,6 +40,8 @@ $(document).ready(function(){
     mRoot.addStaticObject(30, 0, 10, 800);
     mRoot.addStaticObject(400, 500, 800, 10);
 
+    mRoot.getStaticObjectByName("static_1").drawable.color = "#a00";
+
     mRoot.getPlayer().gravity = new Vector(0, -13);
     mRoot.getPlayer().setPosition(300, 300);
     mRoot.getPlayer().mass = 50;
@@ -145,6 +147,8 @@ function sleep(milliseconds) {
     }
 }
 
+
+var renderID;
 var renderTime = 0.0;
 var physicsTime = 0.0;
 var start = window.performance.now();
@@ -190,11 +194,13 @@ function updateRender(){
     }
     if(timeBend > 0){ sleep(timeBend) }
 
-    requestAnimationFrame(updateRender);
+    if(mRoot.mRender.animationFrame){
+        renderID = requestAnimationFrame(updateRender);
+    }
     rprev = rcurr;
 }
 
-requestAnimationFrame(updateRender);
+renderID = requestAnimationFrame(updateRender);
 
 function updatePhysics(time){
     pcurr = window.performance.now();
@@ -215,4 +221,4 @@ function updatePhysics(time){
     }
 }
 
-var physics = setInterval(function(){ updatePhysics(dTime) }, 1);
+var physicsID = setInterval(function(){ updatePhysics(dTime) }, 1);
