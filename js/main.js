@@ -50,7 +50,6 @@ $(document).ready(function(){
 });
 
 function resize(e){
-    console.log("onresize firing");
     mRoot.mRender.w = window.innerWidth - $("#panel").width();
     mRoot.mRender.h = window.innerHeight;
     can.setAttribute("width", mRoot.mRender.w);
