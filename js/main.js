@@ -112,25 +112,45 @@ function keyDown(e){
 
 function keyUp(e){
 	switch(e.keyCode){
-		case ("87" && up == true):
-			up = false;
+		case "87":
+			if(up == true){
+				up = false;
+			}
 			break;
+		
+		case "83":
+			if(down == true){
+				down = false;
+				mRoot.getPlayer().addForce(0, speed);
+			}
+			break;
+		
+		case "65":
+			if(left == true){
+				left = false;
+				mRoot.getPlayer().addForce(speed, 0);
+			}
+			break;
+		
+		case "68":
+			if(right == true){
+				right = false;
+				mRoot.getPlayer().addForce(-speed, 0);
+			}
+			break;
+		
+		case "38":
+			mRoot.static_objects[mRoot.getPlayer().colIndex].addPosition(0, nudgeAmount*(deltaTime/1000));
+		
+		case "40":
+			mRoot.static_objects[mRoot.getPlayer().colIndex].addPosition(0, -nudgeAmount*(deltaTime/1000));
+		
+		case "37":
+			mRoot.static_objects[mRoot.getPlayer().colIndex].addPosition(-nudgeAmount*(deltaTime/1000), 0);
+		
+		case "39":
+			mRoot.static_objects[mRoot.getPlayer().colIndex].addPosition(nudgeAmount*(deltaTime/1000), 0);
 	}
-    /* if((e.keyCode == "87") && up == true){ // Up movement
-        up = false;
-    }*/
-    if(e.keyCode == "83" && down == true){ // Down movement
-        down = false;
-        mRoot.getPlayer().addForce(0, speed);
-    }
-    if(e.keyCode == "65" && left == true){ // Left movement
-        left = false;
-        mRoot.getPlayer().addForce(speed, 0);
-    }
-    if(e.keyCode == "68" && right == true){ // Right movement
-        right = false;
-        mRoot.getPlayer().addForce(-speed, 0);
-    }
 }
 
 window.addEventListener("keydown", keyDown, false);
