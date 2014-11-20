@@ -111,18 +111,23 @@ function keyDown(e){
 }
 
 function keyUp(e){
-    if((e.keyCode == "87" || e.keyCode == "38") && up == true){ // Up Key
+	switch(e.keyCode){
+		case ("87" && up == true):
+			up = false;
+			break;
+	}
+    /* if((e.keyCode == "87") && up == true){ // Up movement
         up = false;
-    }
-    if((e.keyCode == "83" || e.keyCode == "40") && down == true){ // Down Key
+    }*/
+    if(e.keyCode == "83" && down == true){ // Down movement
         down = false;
         mRoot.getPlayer().addForce(0, speed);
     }
-    if((e.keyCode == "65" || e.keyCode == "37") && left == true){ // Left Key
+    if(e.keyCode == "65" && left == true){ // Left movement
         left = false;
         mRoot.getPlayer().addForce(speed, 0);
     }
-    if((e.keyCode == "68" || e.keyCode == "39") && right == true){ // Right Key
+    if(e.keyCode == "68" && right == true){ // Right movement
         right = false;
         mRoot.getPlayer().addForce(-speed, 0);
     }
