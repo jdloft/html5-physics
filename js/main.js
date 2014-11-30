@@ -40,12 +40,11 @@ $(document).ready(function(){
     mRoot.addStaticObject(30, 0, 10, 800);
     mRoot.addStaticObject(400, 500, 800, 10);
 
-    mRoot.getStaticObjectByName("static_1").drawable.color = "#a00";
-
     mRoot.getPlayer().gravity = new Vector(0, -13);
     mRoot.getPlayer().setPosition(300, 300);
     mRoot.getPlayer().mass = 50;
     mRoot.getPlayer().maxSpeed = new Vector(6, 1500);
+	mRoot.getPlayer().friction = 0.93;
     $("#loadingSplash").remove();
 });
 
@@ -62,7 +61,7 @@ function resize(e){
 $(window).resize(resize);
 
 function keyDown(e){
-	if(e.keyCode == "81"){
+	if(e.keyCode == "81"){ // Q Key
 		if(mRoot.getPlayer().col.isColliding(mRoot.static_objects[mRoot.getPlayer().colIndex].col)){
 			delete mRoot.static_objects.splice(mRoot.getPlayer().colIndex, 1);
 		}
@@ -71,12 +70,12 @@ function keyDown(e){
 		$(title).animate({ top: "-242px" }, 300, function(){$(title).remove()});
 		gameStarted = true;
 	}
-	if(e.keyCode == "82"){
+	if(e.keyCode == "82"){ // R Key
 		respawn(mRoot.getPlayer());
 	}
 	
 	if(e.keyCode == "69"){
-		if(!playerColliding){ mRoot.addStaticObject(mRoot.getPlayer().position.getX()-50, mRoot.getPlayer().position.getY()-30, 100, 10) }
+		if(!playerColliding){ mRoot.addStaticObject(mRoot.getPlayer().position.getX()-50, mRoot.getPlayer().position.getY()-mRoot.getPlayer().col.h, 100, 10) }
 	}
 
     if((e.keyCode == "87" || e.keyCode == "38") && up == false){ // Up Key
