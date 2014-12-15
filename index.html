@@ -49,33 +49,33 @@
             <div class="section">
 				<div class="subsection-header" onclick="$('#controlsSubsection').toggle()">Game Controls</div>
 				<div class="subsection" id="controlsSubsection">
-					<input type="button" value="Randomize Platforms!" onClick="randomizePlatforms(mRoot.static_objects)">
-					<input type="button" value="Respawn Player!" onClick="respawn(mRoot.getPlayer())">
-					<input type="button" value="Support Player!" onClick="if(!playerColliding){ mRoot.addStaticObject(mRoot.getPlayer().position.getX()-50, mRoot.getPlayer().position.getY()-30, 100, 10) }">
+					<input type="button" title="Randomize platform positions" value="Randomize Platforms!" onClick="randomizePlatforms(mRoot.static_objects)">
+					<input type="button" title="Reset the player's position and velocity" value="Respawn Player!" onClick="respawn(mRoot.getPlayer())">
+					<input type="button" title="Spawn a platform underneath the player." value="Support Player!" onClick="if(!playerColliding){ mRoot.addStaticObject(mRoot.getPlayer().position.getX()-50, mRoot.getPlayer().position.getY()-30, 100, 10) }">
                     <br><hr noshade="noshade">
 				</div>
 				<div class="subsection-header" onclick="$('#timeSubsection').toggle()">Time</div>
 				<div class="subsection" id="timeSubsection">
 					Delta Time <br>
-					<div id="timeAccLabel" class="label" >1.00</div>
-					<input id="timeAccRange" class="range" type="range" min="1" max="1000" value="100" steps="1" onmousemove="timeAcceleration(this.value)">
-					<input id="timeAccReset" class="reset" type="button" value="R" onclick="timeAccReset()"><br><hr noshade="noshade">
+					<div id="timeAccLabel" class="label" title="Current &Delta;time coefficient">1.00</div>
+					<input id="timeAccRange" class="range" title="Set &Delta;time coefficient" type="range" min="1" max="1000" value="100" steps="1" onmousemove="timeAcceleration(this.value)">
+					<input id="timeAccReset" class="reset" title="Reset &Delta;time coefficient to 1" type="button" value="R" onclick="timeAccReset()"><br><hr noshade="noshade">
 
 					Framerate Offset <br>
-					<div id="frameRateLabel" class="label">0</div>
-					<input id="frameRateRange" class="range" type="range" min="0" max="100" value="0" steps="1" onmousemove="frameRate(this.value)">
-					<input id="frameRateReset" class="reset" type="button" value="R" onclick="frameRateReset()"><br><hr noshade="noshade">
+					<div id="frameRateLabel" class="label" title="Current offset &mdash; pause &mdash; (in milliseconds) between frames">0</div>
+					<input id="frameRateRange" class="range" title="Set current frame offset" type="range" min="0" max="100" value="0" steps="1" onmousemove="frameRate(this.value)">
+					<input id="frameRateReset" class="reset" title="Reset current frame offset to 0" type="button" value="R" onclick="frameRateReset()"><br><hr noshade="noshade">
 					
 					Physics Updates <br>
-					<div id="physicsUpdatesLabel" class="label">1</div>
-					<input id="physicsUpdatesRange" class="range" type="range" min="0" max="10" value="1" steps="1" onmousemove="physicsUpdates(this.value)">
-					<input id="physicsUpdatesReset" class="reset" type="button" value="R" onclick="physicsUpdatesReset()"><br><hr noshade="noshade">
+					<div id="physicsUpdatesLabel" class="label" title="Current amount of physics updates on a frame\n WARNING: This makes the game unplayable">1</div>
+					<input id="physicsUpdatesRange" class="range" title="Set amount of physics updates on a frame" type="range" min="0" max="10" value="1" steps="1" onmousemove="physicsUpdates(this.value)">
+					<input id="physicsUpdatesReset" class="reset" title="Reset amount of physics updates to 1" type="button" value="R" onclick="physicsUpdatesReset()"><br><hr noshade="noshade">
 				</div>
 			
 				<div class="subsection-header" onclick="$('#cameraSubsection').toggle()">Camera</div>
 				<div class="subsection" id="cameraSubsection">
 					Zoom <br>
-					<div id="zoomLabel" class="label">1:1.00</div>
+					<div id="zoomLabel" class="label" title="Current camera &quot;scale&quot;, or zoom">1:1.00</div>
 					<input id="zoomRange" class="range" type="range" min="1" max="500" value="100" steps="1" onmousemove="zoom(this.value)">
 					<input id="zoomReset" class="reset" type="button" value="R" onclick="zoomReset()"><br><hr noshade="noshade">
 				</div>
