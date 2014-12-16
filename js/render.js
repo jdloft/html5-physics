@@ -2,6 +2,12 @@
 
 var undefined_color = "#FF4FF9";
 
+function Camera(zm){
+    this.zoom = zm;
+    this.xoff = 0;
+    this.yoff = 0;
+}
+
 function Rect(posx, posy, width, height, col){
     this.rect = true;
 
@@ -28,6 +34,7 @@ function Rect(posx, posy, width, height, col){
 }
 
 function Render(can, width, height){
+    this.mCamera = new Camera(1);
     this.w = width;
     this.h = height;
     this.canvas = document.getElementById(can);

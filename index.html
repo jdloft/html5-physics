@@ -52,6 +52,8 @@
 					<input type="button" title="Randomize platform positions" value="Randomize Platforms!" onClick="randomizePlatforms(mRoot.static_objects)">
 					<input type="button" title="Reset the player's position and velocity" value="Respawn Player!" onClick="respawn(mRoot.getPlayer())">
 					<input type="button" title="Spawn a platform underneath the player." value="Support Player!" onClick="if(!playerColliding){ mRoot.addStaticObject(mRoot.getPlayer().position.getX()-50, mRoot.getPlayer().position.getY()-30, 100, 10) }">
+                    <br>Center Camera!
+                    <input type="checkbox" title="Toggle whether or not the camera follows the player." value="Center Camera!" onClick="setCameraFollow(this.checked)">
                     <br><hr noshade="noshade">
 				</div>
 				<div class="subsection-header" onclick="$('#timeSubsection').toggle()">Time</div>
@@ -77,7 +79,36 @@
 					Zoom <br>
 					<div id="zoomLabel" class="label" title="Current camera &quot;scale&quot;, or zoom">1:1.00</div>
 					<input id="zoomRange" class="range" type="range" min="1" max="500" value="100" steps="1" onmousemove="zoom(this.value)">
-					<input id="zoomReset" class="reset" type="button" value="R" onclick="zoomReset()"><br><hr noshade="noshade">
+					<input id="zoomReset" class="reset" type="button" value="R" onclick="zoomReset()"><br>
+                    <input id="camPosReset" class="reset" type="button" value="R" onclick="mRoot.mRender.mCamera.xoff = 0; mRoot.mRender.mCamera.yoff = 0">Camera Movement
+                    <table id="platformControls">
+                        <tr>
+                            <td></td>
+                            <td>
+                                <a href="#" onClick="cameraMove('up')"><img src="img/arrows/up.png"></a>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#" onClick="cameraMove('left')"><img src="img/arrows/left.png"></a>
+                            </td>
+                            <td>
+                                <input class="text" type="text" id="nudgeAmount" style="width: 38px; height: 38px;" value="100" onChange="cameraMoveAmount = Number(this.value)">
+                            </td>
+                            <td>
+                                <a href="#" onClick="cameraMove('right')"><img src="img/arrows/right.png"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <a href="#" onClick="cameraMove('down')"><img src="img/arrows/down.png"></a>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <hr noshade="noshade">
 				</div>
 
 				<div class="subsection-header" onclick="$('#physicsSubsection').toggle()">Physics</div>

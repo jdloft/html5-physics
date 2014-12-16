@@ -3,7 +3,6 @@
 function Root(canvas, width, height){
     this.mRender = new Render(canvas, width, height);
     this.mPhysics = new Physics();
-    this.scale = 1;
 
 	this.static_objects = [];
 	this.active_objects = [];
@@ -44,8 +43,8 @@ function Root(canvas, width, height){
 	}
 
     this.updatePhysics = function(deltaTime){
-        this.mPhysics.updateList(this.active_objects, deltaTime, this.scale);
-        this.mPhysics.updateList(this.static_objects, deltaTime, this.scale);
+        this.mPhysics.updateList(this.active_objects, deltaTime, this.mRender);
+        this.mPhysics.updateList(this.static_objects, deltaTime, this.mRender);
         this.mPhysics.updateActiveStatic(this.active_objects, this.static_objects);
     }
 

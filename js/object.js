@@ -25,9 +25,11 @@ function StaticObject(inname, inx, iny, inw, inh){
         this.drawable.w = x;
         this.drawable.h = y;
     }
-    this.update = function(delta, scl){
-        this.drawable.setPosition(this.position.getX()*scl, this.position.getY()*scl);
-        this.drawable.setScale(this.col.w*scl, this.col.h*scl);
+    this.update = function(delta, ren){
+        // TODO Add the offset back in after fixing the zoom
+        this.drawable.setPosition((this.position.getX()-(ren.w/2))*ren.mCamera.zoom+(ren.w/2)+ren.mCamera.xoff,
+            (this.position.getY()-(ren.h/2))*ren.mCamera.zoom+(ren.h/2)+ren.mCamera.yoff);
+        this.drawable.setScale(this.col.w*ren.mCamera.zoom, this.col.h*ren.mCamera.zoom);
     }
     this.destroy = function(){
         
@@ -114,7 +116,7 @@ function ActiveObject(inname, inx, iny, inw, inh){
         return this.y;
     }
     
-    this.update = function(delta, scl){        
+    this.update = function(delta, ren){        
         delAcc = new Vector((this.acceleration.getX()+this.gravity.getX())*delta,
                             (this.acceleration.getY()+this.gravity.getY())*delta);
         this.velocity.add(delAcc);
@@ -131,8 +133,10 @@ function ActiveObject(inname, inx, iny, inw, inh){
             this.velocity.y = -((this.velocity.getY() + this.maxSpeed.getY()) * 0.2) - this.maxSpeed.getY();
         }
         this.col.setPosition(this.position.getX(), this.position.getY());
-        this.drawable.setPosition(this.position.getX()*scl, this.position.getY()*scl);
-        this.drawable.setScale(this.col.w*scl, this.col.h*scl);
+        // TODO Add the offset back in after fixing the zoom
+        this.drawable.setPosition((this.position.getX()-(ren.w/2))*ren.mCamera.zoom+(ren.w/2)+ren.mCamera.xoff,
+            (this.position.getY()-(ren.h/2))*ren.mCamera.zoom+(ren.h/2)+ren.mCamera.yoff);
+        this.drawable.setScale(this.col.w*ren.mCamera.zoom, this.col.h*ren.mCamera.zoom);
     }
     this.reset = function(){
         this.velocity.set(0, 0);
