@@ -1,14 +1,20 @@
 @font-face {
-    font-family: AgencyFbRegular;
-    src: url(../font/agency_fb_regular.ttf);
+    font-family: Roboto-Light;
+    src: url('../font/Roboto-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: bebas;
+    src: url('../font/bebas.ttf') format('truetype');
 }
 
 body {
     background-color:#fff;
-    font-family: AgencyFbRegular;
-    font-weight: bold;
-    font-size: 20px;
-    letter-spacing: 1px;
+    font-family: Roboto-Light;
+    letter-spacing: -1px;
+    font-smooth: always;
+    /* font-weight: bold; */
+    font-size: 19px;
     margin: 0;
     padding: 0;
 }
@@ -90,9 +96,9 @@ body {
 }
 
 #panel input {
-    font-family: AgencyFbRegular;
-    font-size: 20px;
-    font-weight: bold;
+    font-family: Roboto-Light;
+    font-size: 16px;
+    /* font-weight: bold; */
     letter-spacing: 1px;
     margin-bottom: 10px;
 }
@@ -127,8 +133,8 @@ body {
     width: 280px;
     margin: 0;
     padding: 0;
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 18px;
+    /* font-weight: bold; */
 }
 
 #panel #status table .lab {
@@ -138,7 +144,7 @@ body {
 
 #panel #controls {
     font-size: 20px;
-    font-weight: bold;
+    /* font-weight: bold; */
     width: 280px;
 }
 
@@ -172,6 +178,7 @@ body {
 .subsection-header {
 	color: #000;
 	font-size: 24px;
+    font-weight: bold;
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 5px;
