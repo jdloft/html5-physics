@@ -3,6 +3,8 @@
 var undefined_color = "#FF4FF9";
 
 function Camera(zm){
+    this.w = 0;
+    this.h = 0;
     this.zoom = zm;
     this.xoff = 0;
     this.yoff = 0;
@@ -51,7 +53,9 @@ function Render(can, width, height){
             return setInterval(update, 1);
         }
     }
-    this.updateContext = function(){
+    this.update = function(){
+        this.mCamera.w = this.w;
+        this.mCamera.h = this.h;
         this.context.scale(1, -1);
         this.context.translate(0, -this.h);
     }

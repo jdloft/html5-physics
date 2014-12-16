@@ -25,11 +25,11 @@ function StaticObject(inname, inx, iny, inw, inh){
         this.drawable.w = x;
         this.drawable.h = y;
     }
-    this.update = function(delta, ren){
+    this.update = function(delta, cam){
         // TODO Add the offset back in after fixing the zoom
-        this.drawable.setPosition((this.position.getX()-(ren.w/2))*ren.mCamera.zoom+(ren.w/2)+ren.mCamera.xoff,
-            (this.position.getY()-(ren.h/2))*ren.mCamera.zoom+(ren.h/2)+ren.mCamera.yoff);
-        this.drawable.setScale(this.col.w*ren.mCamera.zoom, this.col.h*ren.mCamera.zoom);
+        this.drawable.setPosition((this.position.getX()-(cam.w/2))*cam.zoom+(cam.w/2)+cam.xoff,
+            (this.position.getY()-(cam.h/2))*cam.zoom+(cam.h/2)+cam.yoff);
+        this.drawable.setScale(this.col.w*cam.zoom, this.col.h*cam.zoom);
     }
     this.destroy = function(){
         
@@ -116,7 +116,7 @@ function ActiveObject(inname, inx, iny, inw, inh){
         return this.y;
     }
     
-    this.update = function(delta, ren){        
+    this.update = function(delta, cam){        
         delAcc = new Vector((this.acceleration.getX()+this.gravity.getX())*delta,
                             (this.acceleration.getY()+this.gravity.getY())*delta);
         this.velocity.add(delAcc);
@@ -134,9 +134,9 @@ function ActiveObject(inname, inx, iny, inw, inh){
         }
         this.col.setPosition(this.position.getX(), this.position.getY());
         // TODO Add the offset back in after fixing the zoom
-        this.drawable.setPosition((this.position.getX()-(ren.w/2))*ren.mCamera.zoom+(ren.w/2)+ren.mCamera.xoff,
-            (this.position.getY()-(ren.h/2))*ren.mCamera.zoom+(ren.h/2)+ren.mCamera.yoff);
-        this.drawable.setScale(this.col.w*ren.mCamera.zoom, this.col.h*ren.mCamera.zoom);
+        this.drawable.setPosition((this.position.getX()-(cam.w/2))*cam.zoom+(cam.w/2)+cam.xoff,
+            (this.position.getY()-(cam.h/2))*cam.zoom+(cam.h/2)+cam.yoff);
+        this.drawable.setScale(this.col.w*cam.zoom, this.col.h*cam.zoom);
     }
     this.reset = function(){
         this.velocity.set(0, 0);

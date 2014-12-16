@@ -43,8 +43,8 @@ function Root(canvas, width, height){
 	}
 
     this.updatePhysics = function(deltaTime){
-        this.mPhysics.updateList(this.active_objects, deltaTime, this.mRender);
-        this.mPhysics.updateList(this.static_objects, deltaTime, this.mRender);
+        this.mPhysics.updateList(this.active_objects, deltaTime, this.mRender.mCamera);
+        this.mPhysics.updateList(this.static_objects, deltaTime, this.mRender.mCamera);
         this.mPhysics.updateActiveStatic(this.active_objects, this.static_objects);
     }
 

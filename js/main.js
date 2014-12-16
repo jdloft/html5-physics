@@ -30,7 +30,7 @@ $(document).ready(function(){
     $(can).css("height", height);
 
     mRoot = new Root("canvas", width, height);
-    mRoot.mRender.updateContext();
+    mRoot.mRender.update();
 
     mRoot.addStaticObject(0, 50, 500, 10);
     mRoot.addStaticObject(0, 200, 400, 10);
@@ -55,7 +55,7 @@ function resize(e){
     can.setAttribute("height", mRoot.mRender.h);
     $(can).css("width", mRoot.mRender.w);
     $(can).css("height", mRoot.mRender.h);
-    mRoot.mRender.updateContext();
+    mRoot.mRender.update();
 }
 
 $(window).resize(resize);
