@@ -10,7 +10,8 @@ function fiftyFifty(num1, num2){
 
 function randomizePlatforms(list){
     for(var i = 0; i < list.length; i++){
-        list[i].addPosition(fiftyFifty(Math.random()*100+(Math.random()*10), -Math.random()*100+(Math.random()*10)));
+        list[i].addPosition(fiftyFifty(Math.round(Math.random()*100+(Math.random()*10)),
+        -Math.round(Math.random()*100+(Math.random()*10))));
     }
 }
 
