@@ -1,8 +1,16 @@
 // Gameplay-based Utility Functions gameplay.js
 
+function fiftyFifty(num1, num2){
+	if(Math.random() > 0.5){
+		return num1;
+	} else {
+		return num2;
+	}
+}
+
 function randomizePlatforms(list){
     for(var i = 0; i < list.length; i++){
-        list[i].setPosition(Math.round(Math.random()*1000, 0), Math.round(Math.random()*500, 0));
+        list[i].addPosition(fiftyFifty(Math.random()*100+Math.random*10, -Math.random()*100+Math.random*10));
     }
 }
 
