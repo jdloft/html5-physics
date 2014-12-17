@@ -24,37 +24,37 @@
         <div id="panel">
             <div class="section" id="status">
                 <table>
-                    <tr>
+                    <tr title="Frames Per Second">
                         <td class="lab">FPS: </td>
                         <td class="val" id="fps"></td>
                     </tr>
-                    <tr>
+                    <tr title="Updates Per Second">
                         <td class="lab">UPS: </td>
                         <td class="val" id="ups"></td>
                     </tr>
-                    <tr>
+                    <tr title="Current Player Position">
                         <td class="lab">Position: </td>
                         <td class="val" id="pos"></td>
                     </tr>
-                    <tr>
+                    <tr title="Current Player Velocity">
                         <td class="lab">Velocity: </td>
                         <td class="val" id="vel"></td>
                     </tr>
-                    <tr>
+                    <tr title="Current Player Acceleration">
                         <td class="lab">Acceleration: </td>
                         <td class="val" id="acc"></td>
                     </tr>
                 </table>
             </div>
             <div class="section">
-				<div class="subsection-header" onclick="$('#controlsSubsection').toggle()">Game Controls</div>
+				<div class="subsection-header" title="General Gameplay Customizations / Actions" onclick="$('#controlsSubsection').toggle()">Game Controls</div>
 				<div class="subsection" id="controlsSubsection">
 					<input type="button" title="Randomize platform positions" value="Randomize Platforms!" onClick="randomizePlatforms(mRoot.static_objects)">
 					<input type="button" title="Reset the player's position and velocity" value="Respawn Player!" onClick="respawn(mRoot.getPlayer())">
 					<input type="button" title="Spawn a platform underneath the player." value="Support Player!" onClick="if(!playerColliding){ mRoot.addStaticObject(mRoot.getPlayer().position.getX()-50, mRoot.getPlayer().position.getY()-30, 100, 10) }">
                     <br><hr noshade="noshade">
 				</div>
-				<div class="subsection-header" onclick="$('#timeSubsection').toggle()">Time</div>
+				<div class="subsection-header" title="Change the passage of time in various ways" onclick="$('#timeSubsection').toggle()">Time</div>
 				<div class="subsection" id="timeSubsection">
 					Delta Time <br>
 					<div id="timeAccLabel" class="label" title="Current &Delta;time coefficient">1.00</div>
@@ -72,7 +72,7 @@
 					<input id="physicsUpdatesReset" class="reset" title="Reset amount of physics updates to 1" type="button" value="R" onclick="physicsUpdatesReset()"><br><hr noshade="noshade">
 				</div>
 			
-				<div class="subsection-header" onclick="$('#cameraSubsection').toggle()">Camera</div>
+				<div class="subsection-header" title="Change camera zoom / position" onclick="$('#cameraSubsection').toggle()">Camera</div>
 				<div class="subsection" id="cameraSubsection">
 					Zoom <br>
 					<div id="zoomLabel" class="label" title="Current camera &quot;scale&quot;, or zoom">1:1.00</div>
