@@ -52,8 +52,6 @@
 					<input type="button" title="Randomize platform positions" value="Randomize Platforms!" onClick="randomizePlatforms(mRoot.static_objects)">
 					<input type="button" title="Reset the player's position and velocity" value="Respawn Player!" onClick="respawn(mRoot.getPlayer())">
 					<input type="button" title="Spawn a platform underneath the player." value="Support Player!" onClick="if(!playerColliding){ mRoot.addStaticObject(mRoot.getPlayer().position.getX()-50, mRoot.getPlayer().position.getY()-30, 100, 10) }">
-                    <br>Center Camera!
-                    <input type="checkbox" title="Toggle whether or not the camera follows the player." value="Center Camera!" onClick="setCameraFollow(this.checked)">
                     <br><hr noshade="noshade">
 				</div>
 				<div class="subsection-header" onclick="$('#timeSubsection').toggle()">Time</div>
@@ -108,6 +106,8 @@
                             <td></td>
                         </tr>
                     </table>
+                    <br>Center Camera!
+                    <input type="checkbox" checked="true" title="Toggle whether or not the camera follows the player." value="Center Camera!" onClick="setCameraFollow(this.checked)">
                     <hr noshade="noshade">
 				</div>
 
@@ -170,7 +170,7 @@
                 </div>
                 <div class="subsection-header" onclick="$('#renderSubsection').toggle()">Rendering</div>
                 <div class="subsection" id="renderSubsection">
-                    Fast Rendering: <input id="renderModeSwap" type="checkbox" onclick="swapRendering(this.checked)">
+                    Fast Rendering: <input id="renderModeSwap" type="checkbox" checked="true" onclick="swapRendering(this.checked)">
                 </div>
             </div>
         </div>

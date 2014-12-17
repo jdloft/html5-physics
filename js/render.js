@@ -8,6 +8,10 @@ function Camera(zm){
     this.zoom = zm;
     this.xoff = 0;
     this.yoff = 0;
+    this.offset = function(x, y){
+        this.xoff += x;
+        this.yoff += y;
+    }
 }
 
 function Rect(posx, posy, width, height, col){
@@ -41,7 +45,7 @@ function Render(can, width, height){
     this.h = height;
     this.canvas = document.getElementById(can);
     this.context = this.canvas.getContext("2d");
-    this.animationFrame = true;
+    this.animationFrame = false;
 
     this.toggleAnimationFrame = function(renID, update){
         this.animationFrame = !this.animationFrame;

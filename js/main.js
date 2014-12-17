@@ -112,6 +112,16 @@ var pcurr = window.performance.now();
 var rprev = window.performance.now();
 var rcurr = window.performance.now();
 
+var alignCamToCenter = true;
+
+function slowAlignToPosition (cam, obj, delta){
+    var camCenterX = (cam.w/2)-cam.xoff;
+    var camCenterY = (cam.h/2)-cam.yoff;
+    var objCenterX = obj.position.x+obj.col.w/2;
+    var objCenterY = obj.position.y+obj.col.h/2;
+    cam.offset((camCenterX-objCenterX)*(delta/10), (camCenterY-objCenterY)*(delta/10));
+}
+
 function updateRender(){
     // -------Timing----------
     rcurr = window.performance.now();
@@ -150,6 +160,7 @@ function updateRender(){
     if(mRoot.mRender.animationFrame){
         renderID = requestAnimationFrame(updateRender);
     }
+
     rprev = rcurr;
 }
 
@@ -169,6 +180,10 @@ function updatePhysics(time){
         mRoot.getPlayer().drawable.color = "#f00";
     } else {
         mRoot.getPlayer().drawable.color = "#0f0";
+    }
+
+    if(alignCamToCenter){
+        slowAlignToPosition(mRoot.mRender.mCamera, mRoot.getPlayer(), physicsTime);
     }
 }
 
@@ -194,6 +209,8 @@ $(document).ready(function(){
     mRoot.addStaticObject(0, 40, 10, 8000);
     mRoot.addStaticObject(30, 0, 10, 800);
     mRoot.addStaticObject(400, 500, 800, 10);
+    mRoot.addStaticObject(0, 0, 0, 0, "placeholder");
+    mRoot.getStaticObjectByName("placeholder").drawable.color = "#fff";
 
     mRoot.getPlayer().gravity = new Vector(0, -13);
     mRoot.getPlayer().setPosition(300, 300);
@@ -217,7 +234,7 @@ $(document).ready(function(){
     window.addEventListener("keydown", keyDown, false);
     window.addEventListener("keyup", keyUp, false);
 
-    renderID = requestAnimationFrame(updateRender);
+    renderID = setInterval(updateRender, 0);
 
     var physicsID = setInterval(function(){ updatePhysics(dTime) }, 1);
 

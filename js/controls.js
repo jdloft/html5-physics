@@ -89,7 +89,7 @@ function swapRendering(val){
 }
 
 function setCameraFollow(val){
-  console.log("Camera follow set to " + val);
+    alignCamToCenter = val;
 }
 
 var cameraMoveAmount = 100;
