@@ -14,8 +14,8 @@ function physicsUpdates(val){
 }
 
 function zoom(val){
-    mRoot.mRender.mCamera.zoom = (val/100);
-    document.getElementById("zoomLabel").innerHTML = "1:"+(val/100).toFixed(2);
+    mRoot.mRender.mCamera.zoom = (1/(val/100));
+    document.getElementById("zoomLabel").innerHTML = "1:"+(1/(val/100)).toFixed(2);
 }
 
 function zoomReset(){

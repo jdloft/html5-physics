@@ -10,10 +10,11 @@
 
 body {
     background-color:#fff;
+    color: black;
     font-family: Roboto-Light;
     letter-spacing: -1px;
     font-smooth: always;
-    /* font-weight: bold; */
+    font-weight: bold;
     font-size: 19px;
     margin: 0;
     padding: 0;
@@ -64,7 +65,7 @@ body {
 
 #panel {
     background-color: #fff;
-	color: #333;
+	/* color: #111; */
 	overflow-y: scroll;
     text-align: center;
     width: 300px;
@@ -98,7 +99,7 @@ body {
 #panel input {
     font-family: Roboto-Light;
     font-size: 16px;
-    /* font-weight: bold; */
+    font-weight: bold;
     letter-spacing: 1px;
     margin-bottom: 10px;
 }
@@ -134,7 +135,7 @@ body {
     margin: 0;
     padding: 0;
     font-size: 18px;
-    /* font-weight: bold; */
+    font-weight: bold;
 }
 
 #panel #status table .lab {
@@ -177,7 +178,7 @@ body {
 
 .subsection-header {
 	color: #000;
-	font-size: 24px;
+	font-size: 20px;
     font-weight: bold;
 	margin-left: auto;
 	margin-right: auto;
