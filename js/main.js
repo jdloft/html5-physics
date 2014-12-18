@@ -171,8 +171,14 @@ function updateRender(){
         renderID = requestAnimationFrame(updateRender);
     }
 
+    if(alignCamToCenter){
+        slowAlignToPosition(mRoot.mRender.mCamera, mRoot.getPlayer(), physicsTime, alignCamSpeed);
+    }
+
     rprev = rcurr;
 }
+
+var physicsID;
 
 function updatePhysics(time){
     pcurr = window.performance.now();
@@ -190,10 +196,6 @@ function updatePhysics(time){
         mRoot.getPlayer().drawable.color = "#f00";
     } else {
         mRoot.getPlayer().drawable.color = "#0f0";
-    }
-
-    if(alignCamToCenter){
-        slowAlignToPosition(mRoot.mRender.mCamera, mRoot.getPlayer(), physicsTime, alignCamSpeed);
     }
 }
 
@@ -245,6 +247,6 @@ $(document).ready(function(){
     window.addEventListener("keyup", keyUp, false);
 
     renderID = setInterval(updateRender, 0);
-    var physicsID = setInterval(function(){ updatePhysics(dTime) }, 1);
+    physicsID = setInterval(function(){ updatePhysics(dTime) }, 1);
 
 });
