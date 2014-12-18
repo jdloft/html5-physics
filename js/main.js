@@ -174,6 +174,8 @@ function updateRender(){
     rprev = rcurr;
 }
 
+var physicsID;
+
 function updatePhysics(time){
     pcurr = window.performance.now();
         // -------Physics---------
@@ -245,6 +247,6 @@ $(document).ready(function(){
     window.addEventListener("keyup", keyUp, false);
 
     renderID = setInterval(updateRender, 0);
-    var physicsID = setInterval(function(){ updatePhysics(dTime) }, 1);
+    physicsID = setInterval(function(){ updatePhysics(dTime) }, 1);
 
 });
