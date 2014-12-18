@@ -171,6 +171,10 @@ function updateRender(){
         renderID = requestAnimationFrame(updateRender);
     }
 
+    if(alignCamToCenter){
+        slowAlignToPosition(mRoot.mRender.mCamera, mRoot.getPlayer(), physicsTime, alignCamSpeed);
+    }
+
     rprev = rcurr;
 }
 
@@ -192,10 +196,6 @@ function updatePhysics(time){
         mRoot.getPlayer().drawable.color = "#f00";
     } else {
         mRoot.getPlayer().drawable.color = "#0f0";
-    }
-
-    if(alignCamToCenter){
-        slowAlignToPosition(mRoot.mRender.mCamera, mRoot.getPlayer(), physicsTime, alignCamSpeed);
     }
 }
 
