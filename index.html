@@ -50,6 +50,8 @@
 				<div class="subsection-header" title="General Gameplay Customizations / Actions" onclick="$('#controlsSubsection').toggle()">Game Controls</div>
 				<div class="subsection" id="controlsSubsection">
 					<input type="button" title="Randomize platform positions" value="Randomize Platforms!" onClick="randomizePlatforms(mRoot.static_objects)">
+                    <div id="platformLabel" class="label">100</div>
+                    <input id="platformRange" class="range" type="range" min="0" max="500" value="100" steps="1" onmousemove="platformMoveAmount(this.value)"><br>
 					<input type="button" title="Reset the player's position and velocity" value="Respawn Player!" onClick="respawn(mRoot.getPlayer())">
 					<input type="button" title="Spawn a platform underneath the player." value="Support Player!" onClick="if(!playerColliding){ mRoot.addStaticObject(mRoot.getPlayer().position.getX()-50, mRoot.getPlayer().position.getY()-30, 100, 10) }">
                     <br><hr noshade="noshade">
@@ -108,6 +110,7 @@
                     </table>
                     <br>Center Camera!
                     <input type="checkbox" checked="true" title="Toggle whether or not the camera follows the player." value="Center Camera!" onClick="setCameraFollow(this.checked)">
+                    <input type="text" value="100" class="text" style="width: 50px;" onChange="alignCamSpeed = limit(Number(this.value), 3, 10000); this.value = alignCamSpeed">
                     <hr noshade="noshade">
 				</div>
 

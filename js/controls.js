@@ -104,3 +104,9 @@ function cameraMove(dir){
         mRoot.mRender.mCamera.xoff += -cameraMoveAmount;
     }
 }
+
+var platformMoveAmount = 100;
+function platformMoveUpdate(val){
+    platformMoveAmount = val;
+    document.getElementById("platformLabel").textContent = val;
+}

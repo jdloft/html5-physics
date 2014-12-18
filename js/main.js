@@ -100,7 +100,6 @@ function sleep(milliseconds) {
     }
 }
 
-
 var renderID;
 var renderTime = 0.0;
 var physicsTime = 0.0;
@@ -113,13 +112,24 @@ var rprev = window.performance.now();
 var rcurr = window.performance.now();
 
 var alignCamToCenter = true;
+var alignCamSpeed = 50;
 
-function slowAlignToPosition (cam, obj, delta){
+function slowAlignToPosition (cam, obj, delta, speed){
     var camCenterX = (cam.w/2)-cam.xoff;
     var camCenterY = (cam.h/2)-cam.yoff;
     var objCenterX = obj.position.x+obj.col.w/2;
     var objCenterY = obj.position.y+obj.col.h/2;
-    cam.offset((camCenterX-objCenterX)*(delta/10), (camCenterY-objCenterY)*(delta/10));
+    cam.offset((camCenterX-objCenterX)*(delta/speed), (camCenterY-objCenterY)*(delta/speed));
+}
+
+function limit(val, min, max){
+    if(val <= min){
+        return min;
+    } else if(val >= max){
+        return max;
+    } else {
+        return val;
+    }
 }
 
 function updateRender(){
@@ -183,7 +193,7 @@ function updatePhysics(time){
     }
 
     if(alignCamToCenter){
-        slowAlignToPosition(mRoot.mRender.mCamera, mRoot.getPlayer(), physicsTime);
+        slowAlignToPosition(mRoot.mRender.mCamera, mRoot.getPlayer(), physicsTime, alignCamSpeed);
     }
 }
 
@@ -210,7 +220,7 @@ $(document).ready(function(){
     mRoot.addStaticObject(30, 0, 10, 800);
     mRoot.addStaticObject(400, 500, 800, 10);
     mRoot.addStaticObject(0, 0, 0, 0, "placeholder");
-    mRoot.getStaticObjectByName("placeholder").drawable.color = "#fff";
+    mRoot.getStaticObjectByName("placeholder").drawable.color = "#00f";
 
     mRoot.getPlayer().gravity = new Vector(0, -13);
     mRoot.getPlayer().setPosition(300, 300);
@@ -235,7 +245,6 @@ $(document).ready(function(){
     window.addEventListener("keyup", keyUp, false);
 
     renderID = setInterval(updateRender, 0);
-
     var physicsID = setInterval(function(){ updatePhysics(dTime) }, 1);
 
 });
