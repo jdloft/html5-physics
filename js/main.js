@@ -244,24 +244,30 @@ $(document).ready(function(){
 
     $(window).resize(resize);
 
+    var tabActive = true;
     window.addEventListener("keydown", keyDown, false);
     window.addEventListener("keyup", keyUp, false);
     window.addEventListener("blur", function(){
-        console.log('it was called...');
-        clearInterval(physicsID);
-        if(mRoot.mRender.animationFrame){
-            cancelAnimationFrame(renderID);
-        } else {
-            clearInterval(renderID);
+        if(tabActive){
+            tabActive = false;
+            clearInterval(physicsID);
+            if(mRoot.mRender.animationFrame){
+                cancelAnimationFrame(renderID);
+            } else {
+                clearInterval(renderID);
+            }
         }
     }, false);
     window.addEventListener("focus", function(){
-        pprev = window.performance.now();
-        physicsID = setInterval(function(){ updatePhysics(dTime) }, 0);
-        if(mRoot.mRender.animationFrame){
-            renderID = requestAnimationFrame(updateRender);
-        } else {
-            renderID = setInterval(updateRender, 0);
+        if(!tabActive){
+            tabActive = true;
+            pprev = window.performance.now();
+            physicsID = setInterval(function(){ updatePhysics(dTime) }, 0);
+            if(mRoot.mRender.animationFrame){
+                renderID = requestAnimationFrame(updateRender);
+            } else {
+                renderID = setInterval(updateRender, 0);
+            }
         }
     }, false);
 
