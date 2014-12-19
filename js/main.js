@@ -192,6 +192,7 @@ function updatePhysics(time){
     for(var i = 0; i < mRoot.static_objects.length; i++){
         if(mRoot.getPlayer().col.isColliding(mRoot.static_objects[i].col)){ playerColliding = true; break; } else { playerColliding = false }
     }
+
     if(playerColliding){
         mRoot.getPlayer().drawable.color = "#f00";
     } else {
@@ -245,8 +246,26 @@ $(document).ready(function(){
 
     window.addEventListener("keydown", keyDown, false);
     window.addEventListener("keyup", keyUp, false);
+    window.addEventListener("blur", function(){
+        console.log('it was called...');
+        clearInterval(physicsID);
+        if(mRoot.mRender.animationFrame){
+            cancelAnimationFrame(renderID);
+        } else {
+            clearInterval(renderID);
+        }
+    }, false);
+    window.addEventListener("focus", function(){
+        pprev = window.performance.now();
+        physicsID = setInterval(function(){ updatePhysics(dTime) }, 0);
+        if(mRoot.mRender.animationFrame){
+            renderID = requestAnimationFrame(updateRender);
+        } else {
+            renderID = setInterval(updateRender, 0);
+        }
+    }, false);
 
     renderID = setInterval(updateRender, 0);
-    physicsID = setInterval(function(){ updatePhysics(dTime) }, 1);
+    physicsID = setInterval(function(){ updatePhysics(dTime) }, 0);
 
 });
