@@ -87,40 +87,16 @@ function AABB(inx, iny, width, height){
     }
 }
 
-function Vector(inx, iny){
+function NoClip(inx, iny, inw, inh){
     this.x = inx;
     this.y = iny;
-    this.set = function(inx, iny){
+    this.w = inw;
+    this.h = inh;
+    this.collision = false;
+
+    this.setPosition = function(inx, iny){
         this.x = inx;
         this.y = iny;
-    }
-    this.getX = function(){
-        return this.x;
-    }
-    this.getY = function(){
-        return this.y;
-    }
-    this.add = function(operand){
-        this.x += operand.x;
-        this.y += operand.y;
-    }
-    this.subtract = function(operand){
-        this.x -= operand.x;
-        this.y -= operand.y;
-    }
-    this.multiply = function(operand){
-        this.x *= operand.x;
-        this.y *= operand.y;
-    }
-    this.divide = function(operand){
-        this.x /= operand.x;
-        this.y /= operand.y;
-    }
-    this.normal = function(){
-        
-    }
-    this.print = function(n){
-        return "(" + Number(parseFloat(this.x).toFixed(n)) + ", " + Number(parseFloat(this.y).toFixed(n)) + ")";
     }
 }
 

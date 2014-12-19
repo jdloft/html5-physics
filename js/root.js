@@ -6,6 +6,7 @@ function Root(canvas, width, height){
 
 	this.static_objects = [];
 	this.active_objects = [];
+    this.inactive_objects = [];
     this.tempName = "";
     this.activeLevel = new Level("empty.json");
 
@@ -35,16 +36,41 @@ function Root(canvas, width, height){
         }
     }
 
-	this.addActiveObject = function(inname, inx, iny, inw, inh){
+	this.addActiveObject = function(inx, iny, inw, inh, inname){
         tempName = "active_" + this.active_objects.length+1;
 		if(name != "player"){
 			this.active_objects.push(new ActiveObject(inname || tempName, inx, iny, inw, inh));
 		}
 	}
 
+    this.getActiveObjectByName = function(nm){
+        for(var i = 0; i < this.active_objects.length; i++){
+            if(this.active_objects[i].name == nm){
+                return this.active_objects[i];
+                break;
+            }
+        }
+    }
+
+    this.addInactiveObject = function(inx, iny, inw, inh, inname){
+        tempName = "";
+        tempName = "inactive_" + this.inactive_objects.length;
+        this.inactive_objects.push(new InactiveObject(inname || tempName, inx, iny, inw, inh));
+    }
+
+    this.getInactiveObjectByName = function(nm){
+        for(var i = 0; i < this.inactive_objects.length; i++){
+            if(this.inactive_objects[i].name == nm){
+                return this.inactive_objects[i];
+                break;
+            }
+        }
+    }
+
     this.updatePhysics = function(deltaTime){
         this.mPhysics.updateList(this.active_objects, deltaTime, this.mRender.mCamera);
         this.mPhysics.updateList(this.static_objects, deltaTime, this.mRender.mCamera);
+        this.mPhysics.updateList(this.inactive_objects, deltaTime, this.mRender.mCamera);
         this.mPhysics.updateActiveStatic(this.active_objects, this.static_objects);
     }
 
@@ -52,5 +78,6 @@ function Root(canvas, width, height){
         this.mRender.clearScreen();
         this.mRender.renderList(this.static_objects);
         this.mRender.renderList(this.active_objects);
+        this.mRender.renderList(this.inactive_objects);
     }
 }

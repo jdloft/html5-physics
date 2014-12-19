@@ -112,14 +112,25 @@ var rprev = window.performance.now();
 var rcurr = window.performance.now();
 
 var alignCamToCenter = true;
-var alignCamSpeed = 50;
+var alignCamSpeed = 300;
 
-function slowAlignToPosition (cam, obj, delta, speed){
+function slowAlignCameraToObject (cam, obj, delta, speed){
     var camCenterX = (cam.w/2)-cam.xoff;
     var camCenterY = (cam.h/2)-cam.yoff;
     var objCenterX = obj.position.x+obj.col.w/2;
     var objCenterY = obj.position.y+obj.col.h/2;
     cam.offset((camCenterX-objCenterX)*(delta/speed), (camCenterY-objCenterY)*(delta/speed));
+}
+
+function slowAlignObjectToObject (obj1, obj2, delta, speed){
+    var obj1CenterX = obj1.position.x+obj1.col.w/2;
+    var obj1CenterY = obj1.position.y+obj1.col.h/2;
+    var obj2CenterX = obj2.position.x+obj2.col.w/2;
+    var obj2CenterY = obj2.position.y+obj2.col.h/2;
+    var dist = Math.sqrt((obj2CenterX-obj1CenterX)^2+(obj2CenterY-obj1CenterY)^2);
+    var distx = obj2CenterX-obj1CenterX;
+    var disty = obj2CenterY-obj1CenterY;
+    obj1.addPosition(distx*0.25*(speed*delta/1000), disty*0.25*(speed*delta/1000));
 }
 
 function limit(val, min, max){
@@ -172,8 +183,14 @@ function updateRender(){
     }
 
     if(alignCamToCenter){
-        slowAlignToPosition(mRoot.mRender.mCamera, mRoot.getPlayer(), physicsTime, alignCamSpeed);
+        slowAlignCameraToObject(mRoot.mRender.mCamera, mRoot.getPlayer(), physicsTime, alignCamSpeed);
     }
+
+    slowAlignObjectToObject(mRoot.getInactiveObjectByName("follow1"), mRoot.getPlayer(), physicsTime, 800);
+    slowAlignObjectToObject(mRoot.getInactiveObjectByName("follow2"), mRoot.getPlayer(), physicsTime, 600);
+    slowAlignObjectToObject(mRoot.getInactiveObjectByName("follow3"), mRoot.getPlayer(), physicsTime, 400);
+    slowAlignObjectToObject(mRoot.getInactiveObjectByName("follow4"), mRoot.getPlayer(), physicsTime, 200);
+    slowAlignObjectToObject(mRoot.getInactiveObjectByName("follow5"), mRoot.getPlayer(), physicsTime, 100);
 
     rprev = rcurr;
 }
@@ -192,12 +209,6 @@ function updatePhysics(time){
     for(var i = 0; i < mRoot.static_objects.length; i++){
         if(mRoot.getPlayer().col.isColliding(mRoot.static_objects[i].col)){ playerColliding = true; break; } else { playerColliding = false }
     }
-
-    if(playerColliding){
-        mRoot.getPlayer().drawable.color = "#f00";
-    } else {
-        mRoot.getPlayer().drawable.color = "#0f0";
-    }
 }
 
 $(document).ready(function(){
@@ -214,16 +225,28 @@ $(document).ready(function(){
 
     mRoot = new Root("canvas", width, height);
     mRoot.mRender.update();
+    mRoot.getPlayer().drawable.color = "#00f"
 
     mRoot.addStaticObject(0, 50, 500, 10);
     mRoot.addStaticObject(0, 200, 400, 10);
     mRoot.addStaticObject(100, 100, 500, 10);
     mRoot.addStaticObject(800, 300, 70, 10);
-    mRoot.addStaticObject(0, 40, 10, 8000);
+    mRoot.addStaticObject(0, 40, 10, 800);
     mRoot.addStaticObject(30, 0, 10, 800);
     mRoot.addStaticObject(400, 500, 800, 10);
     mRoot.addStaticObject(0, 0, 0, 0, "placeholder");
     mRoot.getStaticObjectByName("placeholder").drawable.color = "#00f";
+
+    mRoot.addInactiveObject(300, 300, 18, 18, "follow1");
+    mRoot.getInactiveObjectByName("follow1").drawable.color = "#0533eb";
+    mRoot.addInactiveObject(300, 300, 16, 16, "follow2");
+    mRoot.getInactiveObjectByName("follow2").drawable.color = "#0a66d7";
+    mRoot.addInactiveObject(300, 300, 14, 14, "follow3");
+    mRoot.getInactiveObjectByName("follow3").drawable.color = "#0f99c3";
+    mRoot.addInactiveObject(300, 300, 12, 12, "follow4");
+    mRoot.getInactiveObjectByName("follow4").drawable.color = "#14ccaf";
+    mRoot.addInactiveObject(300, 300, 10, 10, "follow5");
+    mRoot.getInactiveObjectByName("follow5").drawable.color = "#1aff9b";
 
     mRoot.getPlayer().gravity = new Vector(0, -13);
     mRoot.getPlayer().setPosition(300, 300);

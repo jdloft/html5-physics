@@ -140,3 +140,39 @@ function ActiveObject(inname, inx, iny, inw, inh){
         this.velocity.set(0, 0);
     }
 }
+
+function InactiveObject(inname, inx, iny, inw, inh){
+    this.name = inname;
+    this.col = new NoClip(inx, iny, inw, inh);
+    this.drawable = new Rect(inx, iny, inw, inh, "#000");
+    this.position = new Vector(inx, iny);
+
+    this.setPosition = function(inx, iny){
+        this.position.x = inx;
+        this.position.y = iny;
+        this.col.setPosition(inx, iny);
+        this.drawable.setPosition(inx, iny);
+    }
+    this.addPosition = function(inx, iny){
+        this.position.x += inx;
+        this.position.y += iny;
+        this.col.x += inx;
+        this.col.y += iny;
+        this.drawable.x += inx;
+        this.drawable.y += iny;
+    }
+    this.setScale = function(x, y){
+        this.col.w = x;
+        this.col.h = y;
+        this.drawable.w = x;
+        this.drawable.h = y;
+    }
+    this.update = function(delta, cam){
+        this.drawable.setPosition((this.position.getX()+cam.xoff-(cam.w/2))*cam.zoom+(cam.w/2),
+            (this.position.getY()+cam.yoff-(cam.h/2))*cam.zoom+(cam.h/2));
+        this.drawable.setScale(this.col.w*cam.zoom, this.col.h*cam.zoom);
+    }
+    this.destroy = function(){
+        
+    }
+}
