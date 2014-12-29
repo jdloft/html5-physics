@@ -2,6 +2,7 @@
 var defaultLevel = {
 	name: "default",
 	description: "The default level, has been here for a very long time",
+	listable: true,
 	spawn_point: [150, 200],
 	static_objects: [
 		{x: 0, y: 50, w: 500, h: 10},
@@ -17,6 +18,7 @@ var defaultLevel = {
 var test1Level = {
 	name: "test1",
 	description: "Simple test level, created by modifying \"default\"",
+	listable: true,
 	spawn_point: [100, 140],
 	static_objects: [
 		{x: 0, y: 0, w: 0, h: 0},
@@ -31,6 +33,7 @@ var test1Level = {
 var jaredLevel = {
 	name: "kid #1",
 	description: "You know who you are",
+	listable: true,
 	spawn_point: [0, 39],
 	static_objects: [
 		{x: 0, y: 40, w: 20, h: 20, color: "#fff"},
@@ -81,8 +84,41 @@ var jaredLevel = {
 	]
 };
 
+var campaign1Level = {
+	name: "campaign1",
+	description: "Level 1 for the campaign",
+	listable: true,
+	spawn_point: [0, 20],
+	static_objects: [
+		{x: 0, y: 0, w: 500, h: 10}
+	]
+};
+
+var campaign2Level = {
+	name: "campaign2",
+	description: "Level 2 for the campaign",
+	listable: false,
+	spawn_point: [0, 20],
+	static_objects: [
+		{x: 0, y: 0, w: 500, h: 10}
+	]
+};
+
+var campaign3Level = {
+	name: "campaign3",
+	description: "Level 3 for the campaign",
+	listable: false,
+	spawn_point: [0, 20],
+	static_objects: [
+		{x: 0, y: 0, w: 500, h: 10}
+	]
+};
+
 var levels = [
 	defaultLevel,
 	test1Level,
-	jaredLevel
+	jaredLevel,
+	campaign1Level,
+	campaign2Level,
+	campaign3Level
 ];

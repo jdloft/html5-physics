@@ -199,6 +199,10 @@
                         opt.value = levels[i].name;
                         opt.textContent = levels[i].name;
                         opt.title = levels[i].description;
+			if(!levels[i].listable){
+				// opt.setAttributeNode(document.createAttribute("disabled"));
+				opt.setAttribute("disabled", "");
+			}
                         document.getElementById("levelList").appendChild(opt);
                     }
                     clearInterval(levelLoadId);
