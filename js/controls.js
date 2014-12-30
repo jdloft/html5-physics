@@ -110,3 +110,33 @@ function platformMoveUpdate(val){
     platformMoveAmount = val;
     document.getElementById("platformLabel").textContent = val;
 }
+
+function selectLevel(levelName){
+    for(var i = 0; i < levels.length; i++){
+        if(levels[i].name == levelName){
+            mRoot.loadLevel(levels[i]);
+        }
+    }
+}
+
+function exportLevel(){
+    var levelString = '';
+    levelString += '{\n';
+    levelString += '\tname: "' + mRoot.active_level.name + '",\n';
+    levelString += '\tdescription: "' + mRoot.active_level.description + '",\n';
+    levelString += '\tspawn_point: [100, 100],\n';
+    levelString += '\tstatic_objects: [\n';
+    for(var i = 0; i < mRoot.static_objects.length; i++){
+        var pl = mRoot.static_objects[i];
+        if(mRoot.static_objects[i].name != "placeholder"){
+            if(i == mRoot.static_objects.length-1){
+                levelString += '\t\t{x: ' + pl.position.x + ', y: ' + pl.position.y + ', w: ' + pl.col.w + ', h: ' + pl.col.h + '}\n';
+            } else {
+                levelString += '\t\t{x: ' + pl.position.x + ', y: ' + pl.position.y + ', w: ' + pl.col.w + ', h: ' + pl.col.h + '},\n';
+            }
+        }
+    }
+    levelString += '\t]\n';
+    levelString += '};';
+    console.log(levelString);
+}

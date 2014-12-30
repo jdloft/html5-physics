@@ -173,7 +173,7 @@ function updateRender(){
     
     // -------Respawn---------
     if(mRoot.getPlayer().position.getY() < -500){
-        mRoot.getPlayer().setPosition(300, 300);
+        mRoot.getPlayer().setPosition(mRoot.active_level.spawn_point[0], mRoot.active_level.spawn_point[1]);
         mRoot.getPlayer().reset();
     }
     if(timeBend > 0){ sleep(timeBend) }
@@ -226,16 +226,6 @@ $(document).ready(function(){
     mRoot = new Root("canvas", width, height);
     mRoot.mRender.update();
     mRoot.getPlayer().drawable.color = "#00f"
-
-    mRoot.addStaticObject(0, 50, 500, 10);
-    mRoot.addStaticObject(0, 200, 400, 10);
-    mRoot.addStaticObject(100, 100, 500, 10);
-    mRoot.addStaticObject(800, 300, 70, 10);
-    mRoot.addStaticObject(0, 40, 10, 800);
-    mRoot.addStaticObject(30, 0, 10, 800);
-    mRoot.addStaticObject(400, 500, 800, 10);
-    mRoot.addStaticObject(0, 0, 0, 0, "placeholder");
-    mRoot.getStaticObjectByName("placeholder").drawable.color = "#00f";
 
     mRoot.addInactiveObject(300, 300, 18, 18, "follow1");
     mRoot.getInactiveObjectByName("follow1").drawable.color = "#0533eb";

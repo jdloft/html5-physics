@@ -8,7 +8,7 @@
         <script type="text/javascript" src="js/object.js"></script>
         <script type="text/javascript" src="js/physics.js"></script>
         <script type="text/javascript" src="js/render.js"></script>
-        <script type="text/javascript" src="js/level.js"></script>
+        <script type="text/javascript" src="js/levels.js"></script>
         <script type="text/javascript" src="js/root.js"></script>
         <script type="text/javascript" src="js/gameplay.js"></script>
         <script type="text/javascript" src="js/controls.js"></script>
@@ -47,7 +47,7 @@
                 </table>
             </div>
             <div class="section">
-				<div class="subsection-header" title="General Gameplay Customizations / Actions" onclick="$('#controlsSubsection').toggle()">Game Controls</div>
+				<div class="subsection-header" title="General gameplay customizations / actions" onclick="$('#controlsSubsection').toggle()">Game Controls</div>
 				<div class="subsection" id="controlsSubsection">
 					<input type="button" title="Randomize platform positions" value="Randomize Platforms!" onClick="randomizePlatforms(mRoot.static_objects)"><br>
                     <div id="platformLabel" class="label">100</div>
@@ -56,6 +56,12 @@
 					<input type="button" title="Spawn a platform underneath the player." value="Support Player!" onClick="if(!playerColliding){ mRoot.addStaticObject(mRoot.getPlayer().position.getX()-50, mRoot.getPlayer().position.getY()-30, 100, 10) }">
                     <br><hr noshade="noshade">
 				</div>
+                <div class="subsection-header" title="Load different levels" onclick="$('#levelsSubsection').toggle()">Levels</div>
+                <div class="subsection" id="levelsSubsection">
+                    <select id="levelList" class="select" onchange="selectLevel(this.options[this.selectedIndex].value)" style="width: 80px;"></select><br>
+                    <input type="button" title="Export current level to the console to be added to the level list" value="Export to Console" onClick="exportLevel()">
+                    <br><hr noshade="noshade">
+                </div>
 				<div class="subsection-header" title="Change the passage of time in various ways" onclick="$('#timeSubsection').toggle()">Time</div>
 				<div class="subsection" id="timeSubsection">
 					Delta Time <br>
@@ -180,11 +186,24 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$("#controlsSubsection").toggle();
+            $("#levelsSubsection").toggle();
 			$("#timeSubsection").toggle();
 			$("#cameraSubsection").toggle();
 			$("#physicsSubsection").toggle();
             $("#editModeSubsection").toggle();
             $("#renderSubsection").toggle();
+            var levelLoadId = setInterval(function(){
+                if(typeof(levels) == "object"){
+                    for(var i = 0; i < levels.length; i++){
+                        var opt = document.createElement("option");
+                        opt.value = levels[i].name;
+                        opt.textContent = levels[i].name;
+                        opt.title = levels[i].description;
+                        document.getElementById("levelList").appendChild(opt);
+                    }
+                    clearInterval(levelLoadId);
+                }
+            }, 10);
 		});
 	</script>
     </body>
