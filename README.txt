@@ -3,8 +3,6 @@ html5-physics
 html5 and Javascript-based, game-oriented API
 
 by Joshua Dorsey  (theStandardToaster @github)
-with contributions from
-_________________ (jdloft @github)
 
 All Rights Reserved.  Copyright © 2014 Joshua Dorsey
 THIS MATERIAL IS PROVIDED AS IS, WITH ABSOLUTELY NO WARRANTY EXPRESSED OR IMPLIED.  ANY USE IS AT YOUR OWN RISK.
