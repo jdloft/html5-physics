@@ -148,11 +148,11 @@ function updateRender(){
     rcurr = window.performance.now();
     renderTime = ((rcurr - rprev) - timeBend);
 
-    document.getElementById("fps").innerHTML = (1000/renderTime).toFixed(0);
-    document.getElementById("ups").innerHTML = (1000/physicsTime).toFixed(0);
-    document.getElementById("pos").innerHTML = mRoot.getPlayer().getPosition().print(2);
-    document.getElementById("vel").innerHTML = mRoot.getPlayer().getVelocity().print(2);
-    document.getElementById("acc").innerHTML = mRoot.getPlayer().getAcceleration().print(2);
+    document.getElementById("fps").textContent = (1000/renderTime).toFixed(0);
+    document.getElementById("ups").textContent = (1000/physicsTime).toFixed(0);
+    document.getElementById("pos").textContent = mRoot.getPlayer().getPosition().print(2);
+    document.getElementById("vel").textContent = mRoot.getPlayer().getVelocity().print(2);
+    document.getElementById("acc").textContent = mRoot.getPlayer().getAcceleration().print(2);
 
     if(playerColliding){
         document.getElementById("nameLabel").innerHTML = mRoot.static_objects[mRoot.getPlayer().colIndex].name;
