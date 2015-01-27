@@ -84,10 +84,10 @@
 				<div class="subsection" id="cameraSubsection">
 					Zoom <br>
 					<div id="zoomLabel" class="label" title="Current camera &quot;scale&quot;, or zoom">1:1.00</div>
-					<input id="zoomRange" class="range" type="range" min="10" max="250" value="100" steps="1" onmousemove="zoom(this.value)">
-					<input id="zoomReset" class="reset" type="button" value="R" onclick="zoomReset()" style="margin-right: 0;"><br>
-                    <input id="camPosReset" class="reset" type="button" value="R" onclick="mRoot.mRender.mCamera.xoff = 0; mRoot.mRender.mCamera.yoff = 0">Camera Movement
-                    <table id="platformControls">
+					<input id="zoomRange" class="range" title="Set current camera &quot;scale&quot;" type="range" min="10" max="250" value="100" steps="1" onmousemove="zoom(this.value)">
+					<input id="zoomReset" class="reset" title="Reset camera &quot;scale&quot;" type="button" value="R" onclick="zoomReset()" style="margin-right: 0;"><br>
+                    <input id="camPosReset" class="reset" title="Reset camera position (if not following object" type="button" value="R" onclick="mRoot.mRender.mCamera.xoff = 0; mRoot.mRender.mCamera.yoff = 0">Camera Movement
+                    <table id="platformControls" title="Controls to shift the camera">
                         <tr>
                             <td></td>
                             <td>
@@ -100,7 +100,7 @@
                                 <a href="#" onClick="cameraMove('left')"><img src="img/arrows/left.png"></a>
                             </td>
                             <td>
-                                <input class="text" type="text" id="nudgeAmount" style="width: 38px; height: 38px;" value="100" onChange="cameraMoveAmount = Number(this.value)">
+                                <input class="text" title="Change amount camera is nudged" type="text" id="nudgeAmount" style="width: 38px; height: 38px;" value="100" onChange="cameraMoveAmount = Number(this.value)">
                             </td>
                             <td>
                                 <a href="#" onClick="cameraMove('right')"><img src="img/arrows/right.png"></a>
@@ -116,19 +116,19 @@
                     </table>
                     <br>Center Camera!
                     <input type="checkbox" checked="true" title="Toggle whether or not the camera follows the player." value="Center Camera!" onClick="setCameraFollow(this.checked)">
-                    <input type="text" value="300" class="text" style="width: 50px;" onChange="alignCamSpeed = limit(Number(this.value), 3, 10000); this.value = alignCamSpeed">
+                    <input type="text" value="300" title="Speed at which the camera follows the player (lower = faster)" class="text" style="width: 50px;" onChange="alignCamSpeed = limit(Number(this.value), 3, 10000); this.value = alignCamSpeed">
                     <hr noshade="noshade">
 				</div>
 
 				<div class="subsection-header" onclick="$('#physicsSubsection').toggle()">Physics</div>
 				<div class="subsection" id="physicsSubsection">
 					Gravity <br>
-					<div id="gravityLabel" class="label" style="margin-top: 10px; width: 100%; text-align: center;">(0, -20)</div>
-					X: <input id="gravityxRange" class="range" type="range" min="-5000" max="5000" value="0" steps="1" onmousemove="gravity(this.value, document.getElementById('gravityyRange').value)"><br>
-					Y: <input id="gravityyRange" class="range" type="range" min="-5000" max="5000" value="-2000" steps="1" onmousemove="gravity(document.getElementById('gravityxRange').value, this.value)"><br>
-					<input type="button" value="No Gravity!" onClick="gravity(0, 0); gravSliders()">
-					<input type="button" value="Invert Gravity!" onClick="gravity(0, 2000); gravSliders()">
-					<input id="gravityReset" class="reset" type="button" value="R" onclick="gravity(0, -2000); gravSliders()"><br><hr noshade="noshade">
+					<div id="gravityLabel" title="Current gravity on the player" class="label" style="margin-top: 10px; width: 100%; text-align: center;">(0, -20)</div>
+					X: <input id="gravityxRange" title="Change x-axis gravity" class="range" type="range" min="-5000" max="5000" value="0" steps="1" onmousemove="gravity(this.value, document.getElementById('gravityyRange').value)"><br>
+					Y: <input id="gravityyRange" title="Change y-axis gravity" class="range" type="range" min="-5000" max="5000" value="-2000" steps="1" onmousemove="gravity(document.getElementById('gravityxRange').value, this.value)"><br>
+					<input type="button" title="Remove all gravity from the player" value="No Gravity!" onClick="gravity(0, 0); gravSliders()">
+					<input type="button" title="Flip gravity on the player" value="Invert Gravity!" onClick="gravity(0, 2000); gravSliders()">
+					<input id="gravityReset" title="Reset gravity to (0, -20)" class="reset" type="button" value="R" onclick="gravity(0, -2000); gravSliders()"><br><hr noshade="noshade">
 				</div>
                 <div class="subsection-header" onclick="$('#editModeSubsection').toggle()">Edit Mode</div>
                 <div class="subsection" id="editModeSubsection">
