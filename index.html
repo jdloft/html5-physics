@@ -12,13 +12,11 @@
         <script type="text/javascript" src="js/root.js"></script>
         <script type="text/javascript" src="js/gameplay.js"></script>
         <script type="text/javascript" src="js/controls.js"></script>
+        <script type="text/javascript" src="js/input.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <div id="loadingSplash">
-            <div id="loadingText">Loading...</div>
-        </div>
         <div id="title"></div>
         <canvas id="canvas" width="800" height="600"></canvas>
         <div id="panel">
@@ -86,7 +84,7 @@
 					<div id="zoomLabel" class="label" title="Current camera &quot;scale&quot;, or zoom">1:1.00</div>
 					<input id="zoomRange" class="range" title="Set current camera &quot;scale&quot;" type="range" min="10" max="250" value="100" steps="1" onmousemove="zoom(this.value)">
 					<input id="zoomReset" class="reset" title="Reset camera &quot;scale&quot;" type="button" value="R" onclick="zoomReset()" style="margin-right: 0;"><br>
-                    <input id="camPosReset" class="reset" title="Reset camera position (if not following object" type="button" value="R" onclick="mRoot.mRender.mCamera.xoff = 0; mRoot.mRender.mCamera.yoff = 0">Camera Movement
+                    <input id="camPosReset" class="reset" title="Reset camera position (if not following object)" type="button" value="R" onclick="mRoot.mRender.mCamera.xoff = 0; mRoot.mRender.mCamera.yoff = 0">Camera Movement
                     <table id="platformControls" title="Controls to shift the camera">
                         <tr>
                             <td></td>
@@ -179,7 +177,8 @@
                 </div>
                 <div class="subsection-header" onclick="$('#renderSubsection').toggle()">Rendering</div>
                 <div class="subsection" id="renderSubsection">
-                    Fast Rendering: <input id="renderModeSwap" type="checkbox" checked="true" onclick="swapRendering(this.checked)">
+                    Fast Rendering: <input id="renderModeSwap" type="checkbox" checked onclick="swapRendering(this.checked)"><br>
+                    Rainbow Background: <input id="renderRainbowBackground" type="checkbox" onclick="rainbowBackground(this.checked)">
                 </div>
             </div>
         </div>

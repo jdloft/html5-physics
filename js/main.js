@@ -84,7 +84,6 @@ function keyUp(e){
     }
 }
 
-
 var playerColliding = false;
 var timeAcc = 1;
 var dTime = 0;
