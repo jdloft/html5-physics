@@ -12,6 +12,8 @@ function containedIn(v, array){
 function Input(object){
 	var self = this;
 	this.obj = object;
+	this.jump = 5
+	this.speed = 1100;
 	this.rotation = 0;
 	this.up = false;
 	this.down = false;
@@ -28,40 +30,55 @@ function Input(object){
 	}
 
 	this.keyDown = function(e){
-		if(containedIn(e.keyCode, self.upKeys)){
-			this.up = true;
+		if(containedIn(e.keyCode, self.upKeys) && !self.up){
+			self.up = true;
 			console.log("Up key down");
-
-		} else if(containedIn(e.keyCode, self.downKeys)){
-			this.down = true;
+			if(self.obj.grounded == 1){
+				self.obj.setGrounded(2);
+				self.obj.addVelocity(0, self.jump);
+			} else if(self.obj.grounded == 2){
+				self.obj.setGrounded(0);
+				self.obj.addVelocity(0, self.jump);
+			}
+			if(self.obj.walled != 0){
+				self.obj.setGrounded();
+			}
+		} else if(containedIn(e.keyCode, self.downKeys) && !self.down){
+			self.down = true;
 			console.log("Down key down");
+			self.obj.addForce(0, -self.speed);
 			
-		} else if(containedIn(e.keyCode, self.leftKeys)){
-			this.left = true;
+		} else if(containedIn(e.keyCode, self.leftKeys) && !self.left){
+			self.left = true;
 			console.log("Left key down");
+			self.obj.addForce(-self.speed, 0);
 
-		} else if(containedIn(e.keyCode, self.rightKeys)){
-			this.right = true;
+		} else if(containedIn(e.keyCode, self.rightKeys) && !self.right){
+			self.right = true;
 			console.log("Right key down");
+			self.obj.addForce(self.speed, 0);
 		}
 	}
 
 	this.keyUp = function(e){
-		if(containedIn(e.keyCode, self.upKeys)){
-			this.up = false;
-			console.log("Up key up");
+		if(containedIn(e.keyCode, self.upKeys) && self.up){
+			self.up = false;
+			console.log("Up	 key up");
 			
-		} else if(containedIn(e.keyCode, self.downKeys)){
-			this.down = false;
+		} else if(containedIn(e.keyCode, self.downKeys) && self.down){
+			self.down = false;
 			console.log("Down key up");
+			self.obj.addForce(0, speed);
 			
-		} else if(containedIn(e.keyCode, self.leftKeys)){
-			this.left = false;
+		} else if(containedIn(e.keyCode, self.leftKeys) && self.left){
+			self.left = false;
 			console.log("Left key up");
+			self.obj.addForce(speed, 0);
 
-		} else if(containedIn(e.keyCode, self.rightKeys)){
-			this.right = false;
+		} else if(containedIn(e.keyCode, self.rightKeys) && self.right){
+			self.right = false;
 			console.log("Right key up");
+			self.obj.addForce(-speed, 0);
 		}
 	}
 
