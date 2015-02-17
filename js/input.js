@@ -1,6 +1,16 @@
 // input.js
 
+function containedIn(v, array){
+	for(var i = 0; i < array.length; i++){
+		if(array[i] == v){
+			return true;
+		}
+	}
+	return false;
+}
+
 function Input(object){
+	var self = this;
 	this.obj = object;
 	this.rotation = 0;
 	this.up = false;
@@ -13,41 +23,52 @@ function Input(object){
 	this.leftKeys = ["65", "37"];
 	this.rightKeys = ["68", "39"];
 
-	this.containedIn = function(v, array){
-		for(var i = 0; i < array.length; i++){
-			if(array[i] == v){
-				return true;
-			}
-		}
-		return false;
-	}
-
 	this.updateRotation = function(){
 		this.rotation = this.obj.gravity.getRotation();
 	}
 
 	this.keyDown = function(e){
-		if(this.containedIn(e.keyCode, this.upKeys)){
+		if(containedIn(e.keyCode, self.upKeys)){
 			this.up = true;
+			console.log("Up key down");
 
-		} else if(this.containedIn(e.keyCode, this.downKeys)){
+		} else if(containedIn(e.keyCode, self.downKeys)){
 			this.down = true;
+			console.log("Down key down");
 			
-		} else if(this.containedIn(e.keyCode, this.leftKeys)){
+		} else if(containedIn(e.keyCode, self.leftKeys)){
 			this.left = true;
+			console.log("Left key down");
 
-		} else if(this.containedIn(e.keyCode, this.rightKeys)){
+		} else if(containedIn(e.keyCode, self.rightKeys)){
 			this.right = true;
+			console.log("Right key down");
 		}
 	}
 
 	this.keyUp = function(e){
+		if(containedIn(e.keyCode, self.upKeys)){
+			this.up = false;
+			console.log("Up key up");
+			
+		} else if(containedIn(e.keyCode, self.downKeys)){
+			this.down = false;
+			console.log("Down key up");
+			
+		} else if(containedIn(e.keyCode, self.leftKeys)){
+			this.left = false;
+			console.log("Left key up");
 
+		} else if(containedIn(e.keyCode, self.rightKeys)){
+			this.right = false;
+			console.log("Right key up");
+		}
 	}
 
 	this.handleEvent = function(e){
 
 	}
 
-	window.addEventListener
+	window.addEventListener("keydown", this.keyDown, false);
+	window.addEventListener("keyup", this.keyUp, false);
 }

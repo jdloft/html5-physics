@@ -16,7 +16,7 @@ var ctx;
 var mRoot;
 
 var editingDimensions = false;
-
+/*
 function keyDown(e){
     if(e.keyCode == "81"){ // Q Key
         if(mRoot.getPlayer().col.isColliding(mRoot.static_objects[mRoot.getPlayer().colIndex].col)){
@@ -82,7 +82,7 @@ function keyUp(e){
         right = false;
         mRoot.getPlayer().addForce(-speed, 0);
     }
-}
+} */
 
 var playerColliding = false;
 var timeAcc = 1;
@@ -223,6 +223,7 @@ $(document).ready(function(){
     $(can).css("height", height);
 
     mRoot = new Root("canvas", width, height);
+	mInput = new Input(mRoot.getPlayer());
     mRoot.mRender.update();
     mRoot.getPlayer().drawable.color = "#00f"
 
@@ -257,8 +258,8 @@ $(document).ready(function(){
     $(window).resize(resize);
 
     var tabActive = true;
-    window.addEventListener("keydown", keyDown, false);
-    window.addEventListener("keyup", keyUp, false);
+    // window.addEventListener("keydown", keyDown, false);
+    // window.addEventListener("keyup", keyUp, false);
     window.addEventListener("blur", function(){
         if(tabActive){
             tabActive = false;
