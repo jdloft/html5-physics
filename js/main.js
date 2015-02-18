@@ -40,8 +40,6 @@ function keyDown(e){
     }
 }
 
-// I'm too hot -- hot damn -- make a dragon wanna retire man
-
 var playerColliding = false;
 var timeAcc = 1;
 var dTime = 0;
