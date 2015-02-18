@@ -20,6 +20,7 @@ var editingDimensions = false;
 function keyDown(e){
     if(e.keyCode == "81"){ // Q Key
         if(mRoot.getPlayer().col.isColliding(mRoot.static_objects[mRoot.getPlayer().colIndex].col)){
+			debug("[Main] Platform " + mRoot.static_objects[mRoot.getPlayer().colIndex].name + " removed");
             delete mRoot.static_objects.splice(mRoot.getPlayer().colIndex, 1);
         }
     }
@@ -29,6 +30,7 @@ function keyDown(e){
     }
     if(e.keyCode == "82"){ // R Key
         respawn(mRoot.getPlayer());
+		debug("[Main] Player respawned");
     }
     
     if(e.keyCode == "69"){ // E Key

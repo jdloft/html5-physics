@@ -27,7 +27,7 @@ function Root(canvas, width, height){
         tempName = "";
         tempName = "static_" + this.static_objects.length;
 		this.static_objects.push(new StaticObject(inname || tempName, inx, iny, inw, inh));
-		debug("[Root] Static object " + tempName || inname + " created");
+		 // debug("[Root] Static object " + tempName || inname + " created");
 	}
 
     this.addStaticObject(0, 0, 0, 0, "placeholder");
@@ -46,6 +46,7 @@ function Root(canvas, width, height){
 		if(name != "player"){
 			this.active_objects.push(new ActiveObject(inname || tempName, inx, iny, inw, inh));
 		}
+		// debug("[Root] Active object " + tempName || inname + " created");
 	}
 
     this.getActiveObjectByName = function(nm){
@@ -61,6 +62,7 @@ function Root(canvas, width, height){
         tempName = "";
         tempName = "inactive_" + this.inactive_objects.length;
         this.inactive_objects.push(new InactiveObject(inname || tempName, inx, iny, inw, inh));
+		 // debug("[Root] Inactive object " + tempName || inname + " created");
     }
 
     this.getInactiveObjectByName = function(nm){
@@ -95,6 +97,7 @@ function Root(canvas, width, height){
             var obj = l.static_objects[i];
             this.addStaticObject(obj.x, obj.y, obj.w, obj.h);
         }
+		debug("[Root] Level \"" + l.name + "\" loaded");
     }
 
     this.loadLevel(defaultLevel);

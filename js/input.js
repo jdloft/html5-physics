@@ -12,7 +12,7 @@ function containedIn(v, array){
 var direction = Object.freeze({up: 0, down: 1, left: 2, right: 3});
 
 function Input(object){
-	debug("[General] Input class created");
+	debug("[Input] Input class created");
 	var self = this;
 	this.obj = object;
 	this.jump = 5

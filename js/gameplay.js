@@ -14,14 +14,16 @@ function randomizePlatforms(list){
     	var randomy = Math.random()*platformMoveAmount;
         list[i].addPosition(fiftyFifty(randomx, -randomx), fiftyFifty(randomy, -randomy));
     }
+	debug("[Gameplay] Randomized platforms");
 }
 
 function respawn(inplayer){
     inplayer.setPosition(300, 300);
     inplayer.reset();
+	debug("[Gameplay] Respawned player");
 }
 
-function supportPlayer(){
+function supportPlayer(){ // This function appears vestigial?
 	if(mRoot.getPlayer().gravity.getY() > 0){
 		console.log("The player needs support from above!");
 	} else if(mRoot.getPlayer().gravity.getY() < 0){
