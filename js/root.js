@@ -1,6 +1,7 @@
 // World management world.js
 
 function Root(canvas, width, height){
+	debug("[General] Root class created");
     this.mRender = new Render(canvas, width, height);
     this.mPhysics = new Physics();
 
@@ -19,13 +20,14 @@ function Root(canvas, width, height){
                 return this.active_objects[i];
             }
         }
-        console.log("Player access attempted before player was created.");
+        debug("[Root] Player access attempted before player was created.");
     }
 
 	this.addStaticObject = function(inx, iny, inw, inh, inname){
         tempName = "";
         tempName = "static_" + this.static_objects.length;
 		this.static_objects.push(new StaticObject(inname || tempName, inx, iny, inw, inh));
+		debug("[Root] Static object " + tempName || inname + " created");
 	}
 
     this.addStaticObject(0, 0, 0, 0, "placeholder");

@@ -9,7 +9,10 @@ function containedIn(v, array){
 	return false;
 }
 
+var direction = Object.freeze({up: 0, down: 1, left: 2, right: 3});
+
 function Input(object){
+	debug("[General] Input class created");
 	var self = this;
 	this.obj = object;
 	this.jump = 5
@@ -32,7 +35,7 @@ function Input(object){
 	this.keyDown = function(e){
 		if(containedIn(e.keyCode, self.upKeys) && !self.up){
 			self.up = true;
-			console.log("Up key down");
+			debug("[Input] Up key down");
 			/* if(self.obj.grounded == 1){
 				self.obj.setGrounded(2);
 				self.obj.addVelocityV2(self.obj.gravity.getNormalized().getRotated(180).getMultiplied(self.jump));
@@ -44,7 +47,6 @@ function Input(object){
 			if(self.obj.walled != 0){
 				self.obj.setGrounded();
 			} */
-			console.log("Gravity Magnitude: " + self.obj.gravity.getMagnitude());
 			if(self.obj.gravity.getMagnitude() != 0){ // If gravity is not zero-g, jump
 				self.obj.addVelocityV2(self.obj.gravity.getNormalized().getRotated(180).getMultiplied(self.jump));
 			} else { // If it is, jetpack time
@@ -52,17 +54,17 @@ function Input(object){
 			}
 		} else if(containedIn(e.keyCode, self.downKeys) && !self.down){
 			self.down = true;
-			console.log("Down key down");
+			debug("[Input] Down key down");
 			self.obj.addForce(0, -self.speed);
 			
 		} else if(containedIn(e.keyCode, self.leftKeys) && !self.left){
 			self.left = true;
-			console.log("Left key down");
+			debug("[Input] Left key down");
 			self.obj.addForce(-self.speed, 0);
 
 		} else if(containedIn(e.keyCode, self.rightKeys) && !self.right){
 			self.right = true;
-			console.log("Right key down");
+			debug("[Input] Right key down");
 			self.obj.addForce(self.speed, 0);
 		}
 	}
@@ -70,30 +72,96 @@ function Input(object){
 	this.keyUp = function(e){
 		if(containedIn(e.keyCode, self.upKeys) && self.up){
 			self.up = false;
-			console.log("Up	key up");
+			debug("[Input] Up key up");
 			if(self.obj.gravity.getMagnitude() == 0){
 				self.obj.addForce(0, -self.speed);
 			}
 			
 		} else if(containedIn(e.keyCode, self.downKeys) && self.down){
 			self.down = false;
-			console.log("Down key up");
+			debug("[Input] Down key up");
 			self.obj.addForce(0, speed);
 			
 		} else if(containedIn(e.keyCode, self.leftKeys) && self.left){
 			self.left = false;
-			console.log("Left key up");
+			debug("[Input] Left key up");
 			self.obj.addForce(speed, 0);
 
 		} else if(containedIn(e.keyCode, self.rightKeys) && self.right){
 			self.right = false;
-			console.log("Right key up");
+			debug("[Input] Right key up");
 			self.obj.addForce(-speed, 0);
 		}
 	}
 
-	this.handleEvent = function(e){
-
+	this.addKey = function(dir, key){
+		switch(dir){
+			case direction.up:
+				if(!containedIn(key, this.upKeys)){
+					this.upKeys.push(key);
+					debug("[Input] " + key + " key added to upKeys");
+					break;
+				}
+				break;
+			case direction.down:
+				if(!containedIn(key, this.downKeys)){
+					this.downKeys.push(key);
+					debug("[Input] " + key + " key added to downKeys");
+					break;
+				}
+				break;
+			case direction.left:
+				if(!containedIn(key, this.leftKeys)){
+					this.leftKeys.push(key);
+					debug("[Input] " + key + " key added to leftKeys");
+					break;
+				}
+				break;
+			case direction.right:
+				if(!containedIn(key, this.rightKeys)){
+					this.rightKeys.push(key);
+					debug("[Input] " + key + " key added to rightKeys");
+					break;
+				}
+				break;
+		}
+	}
+	
+	this.removeKey = function(dir, key){
+		switch(dir){
+			case direction.up:
+				for(var i = 0; i < this.upKeys.length; i++){
+					if(this.upKeys[i] == key){
+						this.upKeys.splice(i, 1);
+						debug("[Input] " + key + " key removed from upKeys");
+					}
+				}
+				break;
+			case direction.down:
+				for(var i = 0; i < this.downKeys.length; i++){
+					if(this.downKeys[i] == key){
+						this.downKeys.splice(i, 1);
+						debug("[Input] " + key + " key removed from downKeys");
+					}
+				}
+				break;
+			case direction.left:
+				for(var i = 0; i < this.leftKeys.length; i++){
+					if(this.leftKeys[i] == key){
+						this.leftKeys.splice(i, 1);
+						debug("[Input] " + key + " key removed from leftKeys");
+					}
+				}
+				break;
+			case direction.right:
+				for(var i = 0; i < this.rightKeys.length; i++){
+					if(this.rightKeys[i] == key){
+						this.rightKeys.splice(i, 1);
+						debug("[Input] " + key + " key removed from rightKeys");
+					}
+				}
+				break;
+		}
 	}
 
 	window.addEventListener("keydown", this.keyDown, false);
