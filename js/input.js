@@ -33,15 +33,22 @@ function Input(object){
 		if(containedIn(e.keyCode, self.upKeys) && !self.up){
 			self.up = true;
 			console.log("Up key down");
-			if(self.obj.grounded == 1){
+			/* if(self.obj.grounded == 1){
 				self.obj.setGrounded(2);
-				self.obj.addVelocity(0, self.jump);
+				self.obj.addVelocityV2(self.obj.gravity.getNormalized().getRotated(180).getMultiplied(self.jump));
+				console.log(self.obj.gravity.getNormalized().getRotated9)
 			} else if(self.obj.grounded == 2){
 				self.obj.setGrounded(0);
-				self.obj.addVelocity(0, self.jump);
+				self.obj.addVelocityV2(self.obj.gravity.getNormalized().getRotated(180).getMultiplied(self.jump));
 			}
 			if(self.obj.walled != 0){
 				self.obj.setGrounded();
+			} */
+			console.log("Gravity Magnitude: " + self.obj.gravity.getMagnitude());
+			if(self.obj.gravity.getMagnitude() != 0){ // If gravity is not zero-g, jump
+				self.obj.addVelocityV2(self.obj.gravity.getNormalized().getRotated(180).getMultiplied(self.jump));
+			} else { // If it is, jetpack time
+				self.obj.addForce(0, self.speed);
 			}
 		} else if(containedIn(e.keyCode, self.downKeys) && !self.down){
 			self.down = true;
@@ -63,7 +70,10 @@ function Input(object){
 	this.keyUp = function(e){
 		if(containedIn(e.keyCode, self.upKeys) && self.up){
 			self.up = false;
-			console.log("Up	 key up");
+			console.log("Up	key up");
+			if(self.obj.gravity.getMagnitude() == 0){
+				self.obj.addForce(0, -self.speed);
+			}
 			
 		} else if(containedIn(e.keyCode, self.downKeys) && self.down){
 			self.down = false;

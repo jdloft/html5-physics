@@ -33,9 +33,21 @@ function Vector(inx, iny){
         this.x *= operand.x;
         this.y *= operand.y;
     }
+    this.getMultiplied = function(operand){
+        return new Vector(this.x*operand, this.y*operand);
+    }
     this.divide = function(operand){
         this.x /= operand.x;
         this.y /= operand.y;
+    }
+
+    this.getNormalized = function(){
+        var mag = Math.sqrt(this.x*this.x+this.y*this.y);
+        return new Vector(this.x/mag, this.y/mag);
+    }
+
+    this.getMagnitude = function(){
+        return Math.sqrt(this.x*this.x+this.y*this.y);
     }
 
     this.rotate = function(degrees){

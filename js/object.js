@@ -69,6 +69,14 @@ function ActiveObject(inname, inx, iny, inw, inh){
         this.velocity.x += inx;
         this.velocity.y += iny;
     }
+    this.setVelocityV2 = function(vec){
+        this.velocity.x = vec.x;
+        this.velocity.y = vec.y;
+    }
+    this.addVelocityV2 = function(vec){
+        this.velocity.x += vec.x;
+        this.velocity.y += vec.y;
+    }
 
     this.getAcceleration = function(){
         return this.acceleration;
@@ -86,6 +94,11 @@ function ActiveObject(inname, inx, iny, inw, inh){
         // F = ma | a = F/m
         this.acceleration.x += inx / this.mass;
         this.acceleration.y += iny / this.mass;
+    }
+
+    this.addForceV2 = function(vec){
+        this.acceleration.x += vec.x / this.mass;
+        this.acceleration.y += vec.y / this.mass;
     }
     
     this.setGrounded = function(gr){
