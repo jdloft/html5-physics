@@ -16,7 +16,7 @@ var ctx;
 var mRoot;
 
 var editingDimensions = false;
-/*
+
 function keyDown(e){
     if(e.keyCode == "81"){ // Q Key
         if(mRoot.getPlayer().col.isColliding(mRoot.static_objects[mRoot.getPlayer().colIndex].col)){
@@ -31,58 +31,16 @@ function keyDown(e){
         respawn(mRoot.getPlayer());
     }
     
-    if(e.keyCode == "69"){
+    if(e.keyCode == "69"){ // E Key
         if(!playerColliding){ mRoot.addStaticObject(mRoot.getPlayer().position.getX()-50, mRoot.getPlayer().position.getY()-mRoot.getPlayer().col.h, 100, 10) }
     }
 
-    if((e.keyCode == "87" || e.keyCode == "38") && up == false){ // Up Key
-        up = true;
-        if(mRoot.getPlayer().grounded == 1){
-            mRoot.getPlayer().setGrounded(2);
-            mRoot.getPlayer().addVelocity(0, jump);
-        } else if(mRoot.getPlayer().grounded == 2){
-            mRoot.getPlayer().setGrounded(0);
-            mRoot.getPlayer().addVelocity(0, jump);
-        }
-        
-        if(mRoot.getPlayer().walled != 0){
-            mRoot.getPlayer().setGrounded();
-        }
-    }
-    if((e.keyCode == "83" || e.keyCode == "40") && down == false){ // Down Key
-        down = true;
-        mRoot.getPlayer().addForce(0, -speed);
-    }
-    if((e.keyCode == "65" || e.keyCode == "37") && left == false){ // Left Key
-        left = true;
-        mRoot.getPlayer().addForce(-speed, 0);
-    }
-    if((e.keyCode == "68" || e.keyCode == "39") && right == false){ // Right Key
-        right = true;
-        mRoot.getPlayer().addForce(speed, 0);
-    }
-    if(e.keyCode == "70"){ // Player Reset
+    if(e.keyCode == "70"){ // F Key
         mRoot.getPlayer().reset();
     }
 }
 
-function keyUp(e){
-    if((e.keyCode == "87" || e.keyCode == "38") && up == true){ // Up Key
-        up = false;
-    }
-    if((e.keyCode == "83" || e.keyCode == "40") && down == true){ // Down Key
-        down = false;
-        mRoot.getPlayer().addForce(0, speed);
-    }
-    if((e.keyCode == "65" || e.keyCode == "37") && left == true){ // Left Key
-        left = false;
-        mRoot.getPlayer().addForce(speed, 0);
-    }
-    if((e.keyCode == "68" || e.keyCode == "39") && right == true){ // Right Key
-        right = false;
-        mRoot.getPlayer().addForce(-speed, 0);
-    }
-} */
+// I'm too hot -- hot damn -- make a dragon wanna retire man
 
 var playerColliding = false;
 var timeAcc = 1;
@@ -258,8 +216,7 @@ $(document).ready(function(){
     $(window).resize(resize);
 
     var tabActive = true;
-    // window.addEventListener("keydown", keyDown, false);
-    // window.addEventListener("keyup", keyUp, false);
+    window.addEventListener("keydown", keyDown, false);
     window.addEventListener("blur", function(){
         if(tabActive){
             tabActive = false;
