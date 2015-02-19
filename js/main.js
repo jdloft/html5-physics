@@ -8,7 +8,6 @@ var right = false;
 var speed = 1100;
 var jump = 5;
 
-var gameStarted = false;
 var title = "#title";
 
 var can;
@@ -23,10 +22,6 @@ function keyDown(e){
 			debug("[Main] Platform " + mRoot.static_objects[mRoot.getPlayer().colIndex].name + " removed");
             delete mRoot.static_objects.splice(mRoot.getPlayer().colIndex, 1);
         }
-    }
-    if(gameStarted == false){
-        $(title).animate({ top: "-242px" }, 300, function(){$(title).remove()});
-        gameStarted = true;
     }
     if(e.keyCode == "82"){ // R Key
         respawn(mRoot.getPlayer());
@@ -47,6 +42,7 @@ var timeAcc = 1;
 var dTime = 0;
 var timeBend = 0;
 var physicsUpd = 1;
+var rainbowBackgroundOn = false;
 
 function sleep(milliseconds) {
     var start = new Date().getTime();
@@ -130,8 +126,7 @@ function updateRender(){
     
     // -------Respawn---------
     if(mRoot.getPlayer().position.getY() < -500){
-        mRoot.getPlayer().setPosition(mRoot.active_level.spawn_point[0], mRoot.active_level.spawn_point[1]);
-        mRoot.getPlayer().reset();
+		respawn(mRoot.getPlayer());
     }
     if(timeBend > 0){ sleep(timeBend) }
 
@@ -148,6 +143,16 @@ function updateRender(){
     slowAlignObjectToObject(mRoot.getInactiveObjectByName("follow3"), mRoot.getPlayer(), physicsTime, 400);
     slowAlignObjectToObject(mRoot.getInactiveObjectByName("follow4"), mRoot.getPlayer(), physicsTime, 200);
     slowAlignObjectToObject(mRoot.getInactiveObjectByName("follow5"), mRoot.getPlayer(), physicsTime, 100);
+	
+	var period = 1000;
+	if(rainbowBackgroundOn){
+		var color = hexNum(Math.floor((window.performance.now()%period)/period*255)) +
+					hexNum(Math.floor((window.performance.now()%period)/period*255)) +
+					hexNum(Math.floor((window.performance.now()%period)/period*255));
+		mRoot.mRender.background = "#" + color;
+	} else {
+		mRoot.mRender.background = "#ccf";
+	}
 
     rprev = rcurr;
 }
@@ -243,5 +248,5 @@ $(document).ready(function(){
 
     renderID = setInterval(updateRender, 0);
     physicsID = setInterval(function(){ updatePhysics(dTime) }, 0);
-
+	setTimeout(function(){$(title).animate({ top: "-242px" }, 300, function(){$(title).remove()})}, 1000);
 });

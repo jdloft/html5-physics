@@ -83,6 +83,7 @@ function Root(canvas, width, height){
 
     this.updateRender = function(){
         this.mRender.clearScreen();
+		this.mRender.drawBackgroundColor();
         this.mRender.renderList(this.static_objects);
         this.mRender.renderList(this.active_objects);
         this.mRender.renderList(this.inactive_objects);

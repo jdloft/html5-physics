@@ -1,5 +1,72 @@
 // Math Utilities
 
+function hexDigit(num){ // Number from 1-15 to single hex digit
+	switch(num){
+		case 0:
+			var ret = 0;
+			break;
+		case 1:
+			var ret = 1;
+			break;
+		case 2:
+			var ret = 2;
+			break;
+		case 3:
+			var ret = 3;
+			break;
+		case 4:
+			var ret = 4;
+			break;
+		case 5:
+			var ret = 5;
+			break;
+		case 6:
+			var ret = 6;
+			break;
+		case 7:
+			var ret = 7;
+			break;
+		case 8:
+			var ret = 8;
+			break;
+		case 9:
+			var ret = 9;
+			break;
+		case 10:
+			var ret = "a";
+			break;
+		case 11:
+			var ret = "b";
+			break;
+		case 12:
+			var ret = "c";
+			break;
+		case 13:
+			var ret = "d";
+			break;
+		case 14:
+			var ret = "e";
+			break;
+		case 15:
+			var ret = "f";
+			break;
+		default:
+			debug("[Math] Out-of-range number " + num + " passed to hexDigit()");
+			break;
+	}
+	if(typeof ret != "undefined"){
+		return ret.toString();
+	}
+}
+
+function hexNum(num){ // Number from 0-255 to hex character
+	if(num%16 == 0){
+		return hexDigit(Math.floor(num/16))+hexDigit(Math.floor(num/16));
+	} else {
+		return hexDigit(Math.floor(num/16))+hexDigit(num-Math.floor(num/16)*16);
+	}
+}
+
 function toDegrees(angle) {
   return angle * (180 / Math.PI);
 }

@@ -45,7 +45,7 @@ function ActiveObject(inname, inx, iny, inw, inh){
     this.bounciness = 0.3;
     this.mass = 1;
     this.maxSpeed = new Vector(4, 10);
-    this.grounded = 0;
+    this.colliding = false;
     this.walled = 0;
     this.position = new Vector(inx, iny);
     this.velocity = new Vector(0.0, 0.0);
@@ -91,7 +91,7 @@ function ActiveObject(inname, inx, iny, inw, inh){
     }
 
     this.addForce = function(inx, iny){
-        // F = ma | a = F/m
+        // F = ma -> a = F/m
         this.acceleration.x += inx / this.mass;
         this.acceleration.y += iny / this.mass;
     }

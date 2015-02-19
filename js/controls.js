@@ -168,3 +168,8 @@ function exportLevel(){
     levelString += '};';
     console.log(levelString);
 }
+
+function rainbowBackground(val){
+	debug("[Controls] Rainbow background set to " + val);
+	rainbowBackgroundOn = val;
+}
