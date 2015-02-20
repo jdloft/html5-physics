@@ -46,7 +46,7 @@ function Render(can, width, height){
     this.canvas = document.getElementById(can);
     this.context = this.canvas.getContext("2d");
     this.animationFrame = false;
-	this.background = "#ccf";
+	this.background = "#fff";
 
     this.toggleAnimationFrame = function(renID, update){
         this.animationFrame = !this.animationFrame;

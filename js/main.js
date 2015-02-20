@@ -151,7 +151,7 @@ function updateRender(){
 					    hexNum(Math.floor((0.5*Math.sin((window.performance.now()%period*Math.PI*2)/period+(2/3)*period)+0.5)*255));
 		mRoot.mRender.background = color;
 	} else {
-		mRoot.mRender.background = "#ccf";
+		mRoot.mRender.background = "#fff";
 	}
 
     rprev = rcurr;
