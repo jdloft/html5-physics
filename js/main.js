@@ -144,12 +144,12 @@ function updateRender(){
     slowAlignObjectToObject(mRoot.getInactiveObjectByName("follow4"), mRoot.getPlayer(), physicsTime, 200);
     slowAlignObjectToObject(mRoot.getInactiveObjectByName("follow5"), mRoot.getPlayer(), physicsTime, 100);
 	
-	var period = 1000;
+	var period = 1500;
 	if(rainbowBackgroundOn){
-		var color = hexNum(Math.floor((window.performance.now()%period)/period*255)) +
-					hexNum(Math.floor((window.performance.now()%period)/period*255)) +
-					hexNum(Math.floor((window.performance.now()%period)/period*255));
-		mRoot.mRender.background = "#" + color;
+		var color = "#"+hexNum(Math.floor((0.5*Math.sin((window.performance.now()%period*Math.PI*2)/period)+0.5)*255))+
+				        hexNum(Math.floor((0.5*Math.sin((window.performance.now()%period*Math.PI*2)/period+(1/3)*period)+0.5)*255))+
+					    hexNum(Math.floor((0.5*Math.sin((window.performance.now()%period*Math.PI*2)/period+(2/3)*period)+0.5)*255));
+		mRoot.mRender.background = color;
 	} else {
 		mRoot.mRender.background = "#ccf";
 	}
