@@ -167,3 +167,13 @@ function Input(object){
 	window.addEventListener("keydown", this.keyDown, false);
 	window.addEventListener("keyup", this.keyUp, false);
 }
+
+function InputTest(){
+	this.getSingleton = function(){
+		if(this.instance){
+			return this.instance;
+		} else {
+			this.instance = new this();
+		}
+	}
+}
