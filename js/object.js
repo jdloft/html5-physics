@@ -1,7 +1,7 @@
 // Object Utilities object.js
 
 function StaticObject(inname, inx, iny, inw, inh){
-	this.name = inname;
+    this.name = inname;
     this.col = new AABB(inx, iny, inw, inh);
     this.drawable = new Rect(inx, iny, inw, inh, "#000");
     this.position = new Vector(inx, iny);
@@ -31,12 +31,12 @@ function StaticObject(inname, inx, iny, inw, inh){
         this.drawable.setScale(this.col.w*cam.zoom, this.col.h*cam.zoom);
     }
     this.destroy = function(){
-        
+
     }
 }
 
 function ActiveObject(inname, inx, iny, inw, inh){
-	this.name = inname;
+    this.name = inname;
     this.col = new AABB(inx, iny, inw, inh);
     this.colIndex = 0;
     this.drawable = new Rect(inx, iny, inw, inh, "#000");
@@ -100,7 +100,7 @@ function ActiveObject(inname, inx, iny, inw, inh){
         this.acceleration.x += vec.x / this.mass;
         this.acceleration.y += vec.y / this.mass;
     }
-    
+
     this.setGrounded = function(gr){
         this.grounded = gr;
     }
@@ -127,8 +127,8 @@ function ActiveObject(inname, inx, iny, inw, inh){
     this.getY = function(){
         return this.y;
     }
-    
-    this.update = function(delta, cam){        
+
+    this.update = function(delta, cam){
         delAcc = new Vector((this.acceleration.getX()+this.gravity.getX())*delta,
                             (this.acceleration.getY()+this.gravity.getY())*delta);
         this.velocity.add(delAcc);
@@ -186,6 +186,6 @@ function InactiveObject(inname, inx, iny, inw, inh){
         this.drawable.setScale(this.col.w*cam.zoom, this.col.h*cam.zoom);
     }
     this.destroy = function(){
-        
+
     }
 }

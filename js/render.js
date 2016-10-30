@@ -46,7 +46,7 @@ function Render(can, width, height){
     this.canvas = document.getElementById(can);
     this.context = this.canvas.getContext("2d");
     this.animationFrame = false;
-	this.background = "#fff";
+    this.background = "#fff";
 
     this.toggleAnimationFrame = function(renID, update){
         this.animationFrame = !this.animationFrame;
@@ -78,14 +78,14 @@ function Render(can, width, height){
             }
         }
     }
-	this.drawBackgroundColor = function(color){
-		if(typeof(color) != "undefined"){
-			this.background = color;
-		}
-		this.context.fillStyle = this.background;
-		this.context.fillRect(0, 0, this.w, this.h);
-		this.fillStyle = undefined_color;
-	}
+    this.drawBackgroundColor = function(color){
+        if(typeof(color) != "undefined"){
+            this.background = color;
+        }
+        this.context.fillStyle = this.background;
+        this.context.fillRect(0, 0, this.w, this.h);
+        this.fillStyle = undefined_color;
+    }
     this.clearScreen = function(){
         this.context.clearRect(0, 0, this.w, this.h);
     }

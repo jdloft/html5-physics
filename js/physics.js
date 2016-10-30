@@ -51,9 +51,9 @@ function AABB(inx, iny, width, height){
         var amax = this.getMax();
         var bmin = other.getMin();
         var bmax = other.getMax();
-        
+
         var mtd = new Vector(0.0, 0.0);
-        
+
         if (left > 0 || right < 0){
             return mtd;
         }
@@ -65,7 +65,7 @@ function AABB(inx, iny, width, height){
         var right = (bmax.getX() - amin.getX());
         var top = (bmin.getY() - amax.getY());
         var bottom = (bmax.getY() - amin.getY());
-        
+
         if(Math.abs(left) < right){
             mtd.x = left;
         } else {
@@ -110,9 +110,9 @@ function Physics(){
     }
     this.updateActiveStatic = function(active_objects, static_objects){
         var minTranslationAngle;
-        
+
         var activeGravityAngle;
-        
+
         // TODO Update this for all surfaces, not just axis-aligned ones
         for(var i = 0; i < active_objects.length; i++){
             for(var j = 0; j < static_objects.length; j++){
@@ -126,7 +126,7 @@ function Physics(){
                     active_objects[i].position.x += this.minTranslation.x;
                     active_objects[i].position.y += this.minTranslation.y;
                     // active_objects[i].poosition.add(this.minTranslation);
-                    
+
                     if(this.minTranslation.getX() > 0){
                         if(active_objects[i].velocity.x < 0){
                              active_objects[i].velocity.x = 0;
@@ -142,11 +142,11 @@ function Physics(){
                              }
                         }
                     }
-                    
+
                     // If the minTranslation vector is opposite the object's gravity vector
                     minTranslationAngle = toDegrees(Math.atan2(this.minTranslation.getX(), this.minTranslation.getY()));
                     activeGravityAngle = toDegrees(Math.atan2(active_objects[i].gravity.getX(), active_objects[i].gravity.getY()));
-                    
+
                     if(minTranslationAngle != 0 && minTranslationAngle < 105 && minTranslationAngle > 75){
                         active_objects[i].setWalled(1);
                     } else if(minTranslationAngle > -105 && minTranslationAngle < -75){
@@ -154,7 +154,7 @@ function Physics(){
                     } else {
                         active_objects[i].setWalled(0);
                     }
-                    
+
                     if(active_objects[i].walled == 0){
                         if(minTranslationAngle < 15 && minTranslationAngle >= 0){
                             active_objects[i].setGrounded(1);

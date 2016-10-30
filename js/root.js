@@ -1,17 +1,17 @@
 // World management world.js
 
 function Root(canvas, width, height){
-	debug("[General] Root class created");
+    debug("[General] Root class created");
     this.mRender = new Render(canvas, width, height);
     this.mPhysics = new Physics();
 
-	this.static_objects = [];
-	this.active_objects = [];
+    this.static_objects = [];
+    this.active_objects = [];
     this.inactive_objects = [];
     this.tempName = "";
     this.active_level = 'null';
 
-	this.active_objects.push(new ActiveObject("player", 0, 0, 20, 20));
+    this.active_objects.push(new ActiveObject("player", 0, 0, 20, 20));
     this.static_objects.push(new StaticObject("placeholder", 0, 0, 0, 0));
 
     this.getPlayer = function(){
@@ -23,12 +23,12 @@ function Root(canvas, width, height){
         debug("[Root] Player access attempted before player was created.");
     }
 
-	this.addStaticObject = function(inx, iny, inw, inh, inname){
+    this.addStaticObject = function(inx, iny, inw, inh, inname){
         tempName = "";
         tempName = "static_" + this.static_objects.length;
-		this.static_objects.push(new StaticObject(inname || tempName, inx, iny, inw, inh));
-		 // debug("[Root] Static object " + tempName || inname + " created");
-	}
+        this.static_objects.push(new StaticObject(inname || tempName, inx, iny, inw, inh));
+         // debug("[Root] Static object " + tempName || inname + " created");
+    }
 
     this.addStaticObject(0, 0, 0, 0, "placeholder");
 
@@ -41,13 +41,13 @@ function Root(canvas, width, height){
         }
     }
 
-	this.addActiveObject = function(inx, iny, inw, inh, inname, color){
+    this.addActiveObject = function(inx, iny, inw, inh, inname, color){
         tempName = "active_" + this.active_objects.length+1;
-		if(name != "player"){
-			this.active_objects.push(new ActiveObject(inname || tempName, inx, iny, inw, inh));
-		}
-		// debug("[Root] Active object " + tempName || inname + " created");
-	}
+        if(name != "player"){
+            this.active_objects.push(new ActiveObject(inname || tempName, inx, iny, inw, inh));
+        }
+        // debug("[Root] Active object " + tempName || inname + " created");
+    }
 
     this.getActiveObjectByName = function(nm){
         for(var i = 0; i < this.active_objects.length; i++){
@@ -62,7 +62,7 @@ function Root(canvas, width, height){
         tempName = "";
         tempName = "inactive_" + this.inactive_objects.length;
         this.inactive_objects.push(new InactiveObject(inname || tempName, inx, iny, inw, inh));
-		 // debug("[Root] Inactive object " + tempName || inname + " created");
+         // debug("[Root] Inactive object " + tempName || inname + " created");
     }
 
     this.getInactiveObjectByName = function(nm){
@@ -83,7 +83,7 @@ function Root(canvas, width, height){
 
     this.updateRender = function(){
         this.mRender.clearScreen();
-		this.mRender.drawBackgroundColor();
+        this.mRender.drawBackgroundColor();
         this.mRender.renderList(this.static_objects);
         this.mRender.renderList(this.active_objects);
         this.mRender.renderList(this.inactive_objects);
@@ -98,7 +98,7 @@ function Root(canvas, width, height){
             var obj = l.static_objects[i];
             this.addStaticObject(obj.x, obj.y, obj.w, obj.h);
         }
-		debug("[Root] Level \"" + l.name + "\" loaded");
+        debug("[Root] Level \"" + l.name + "\" loaded");
     }
 
     this.loadLevel(defaultLevel);

@@ -19,15 +19,15 @@ var editingDimensions = false;
 function keyDown(e){
     if(e.keyCode == "81"){ // Q Key
         if(mRoot.getPlayer().col.isColliding(mRoot.static_objects[mRoot.getPlayer().colIndex].col)){
-			debug("[Main] Platform " + mRoot.static_objects[mRoot.getPlayer().colIndex].name + " removed");
+            debug("[Main] Platform " + mRoot.static_objects[mRoot.getPlayer().colIndex].name + " removed");
             delete mRoot.static_objects.splice(mRoot.getPlayer().colIndex, 1);
         }
     }
     if(e.keyCode == "82"){ // R Key
         respawn(mRoot.getPlayer());
-		debug("[Main] Player respawned");
+        debug("[Main] Player respawned");
     }
-    
+
     if(e.keyCode == "69"){ // E Key
         if(!playerColliding){ mRoot.addStaticObject(mRoot.getPlayer().position.getX()-50, mRoot.getPlayer().position.getY()-mRoot.getPlayer().col.h, 100, 10) }
     }
@@ -123,10 +123,10 @@ function updateRender(){
 
     // -------Render----------
     mRoot.updateRender();
-    
+
     // -------Respawn---------
     if(mRoot.getPlayer().position.getY() < -500){
-		respawn(mRoot.getPlayer());
+        respawn(mRoot.getPlayer());
     }
     if(timeBend > 0){ sleep(timeBend) }
 
@@ -143,16 +143,16 @@ function updateRender(){
     slowAlignObjectToObject(mRoot.getInactiveObjectByName("follow3"), mRoot.getPlayer(), physicsTime, 400);
     slowAlignObjectToObject(mRoot.getInactiveObjectByName("follow4"), mRoot.getPlayer(), physicsTime, 200);
     slowAlignObjectToObject(mRoot.getInactiveObjectByName("follow5"), mRoot.getPlayer(), physicsTime, 100);
-	
-	var period = 1500;
-	if(rainbowBackgroundOn){
-		var color = "#"+hexNum(Math.floor((0.5*Math.sin((window.performance.now()%period*Math.PI*2)/period)+0.5)*255))+
-				        hexNum(Math.floor((0.5*Math.sin((window.performance.now()%period*Math.PI*2)/period+(1/3)*period)+0.5)*255))+
-					    hexNum(Math.floor((0.5*Math.sin((window.performance.now()%period*Math.PI*2)/period+(2/3)*period)+0.5)*255));
-		mRoot.mRender.background = color;
-	} else {
-		mRoot.mRender.background = "#fff";
-	}
+
+    var period = 1500;
+    if(rainbowBackgroundOn){
+        var color = "#"+hexNum(Math.floor((0.5*Math.sin((window.performance.now()%period*Math.PI*2)/period)+0.5)*255))+
+                        hexNum(Math.floor((0.5*Math.sin((window.performance.now()%period*Math.PI*2)/period+(1/3)*period)+0.5)*255))+
+                        hexNum(Math.floor((0.5*Math.sin((window.performance.now()%period*Math.PI*2)/period+(2/3)*period)+0.5)*255));
+        mRoot.mRender.background = color;
+    } else {
+        mRoot.mRender.background = "#fff";
+    }
 
     rprev = rcurr;
 }
@@ -179,14 +179,14 @@ $(document).ready(function(){
 
     can = document.getElementById("canvas");
     ctx = can.getContext("2d");
-    
+
     can.setAttribute("width", width);
     can.setAttribute("height", height);
     $(can).css("width", width);
     $(can).css("height", height);
 
     mRoot = new Root("canvas", width, height);
-	mInput = new Input(mRoot.getPlayer());
+    mInput = new Input(mRoot.getPlayer());
     mRoot.mRender.update();
     mRoot.getPlayer().drawable.color = "#00f"
 
@@ -205,7 +205,7 @@ $(document).ready(function(){
     mRoot.getPlayer().setPosition(300, 300);
     mRoot.getPlayer().mass = 50;
     mRoot.getPlayer().maxSpeed = new Vector(6, 1500);
-	mRoot.getPlayer().friction = 0.93;
+    mRoot.getPlayer().friction = 0.93;
     $("#loadingSplash").remove();
 
     function resize(e){
@@ -248,5 +248,5 @@ $(document).ready(function(){
 
     renderID = setInterval(updateRender, 0);
     physicsID = setInterval(function(){ updatePhysics(dTime) }, 0);
-	setTimeout(function(){$(title).animate({ top: "-242px" }, 300, function(){$(title).remove()})}, 1000);
+    setTimeout(function(){$(title).animate({ top: "-242px" }, 300, function(){$(title).remove()})}, 1000);
 });
